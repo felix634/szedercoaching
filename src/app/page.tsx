@@ -129,11 +129,11 @@ export default function Home() {
                 <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/images/swimming.jpg"
-                    alt="Schwimmen"
+                    src="/images/szedi.jpg"
+                    alt="Szedi"
                     width={600}
-                    height={400}
-                    className="w-full object-cover aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
+                    height={600}
+                    className="w-full object-cover aspect-square transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
                 </div>
@@ -431,8 +431,8 @@ export default function Home() {
             <AnimatedSection delay={0.4} className="md:col-span-4">
               <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]" disableWave>
                 <Image
-                  src="/images/szedi.jpg"
-                  alt="Szedi"
+                  src="/images/swimming.jpg"
+                  alt="Schwimmen"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
