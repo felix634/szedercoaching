@@ -8,6 +8,7 @@ import WaveDivider from "@/components/WaveDivider";
 import AnimatedSection from "@/components/AnimatedSection";
 import WaterSurface from "@/components/WaterSurface";
 import Marquee from "@/components/Marquee";
+import WaterCard from "@/components/WaterCard";
 
 const angebote = [
   {
@@ -361,22 +362,24 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {angebote.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.08}>
-                <div className="glass-card rounded-2xl p-7 h-full group cursor-default">
-                  <div className="flex items-start justify-between mb-5">
-                    <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 group-hover:bg-water-500/20 group-hover:text-water-300 transition-all duration-300">
-                      {item.icon}
+                <WaterCard className="glass-card h-full group">
+                  <div className="p-7">
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 group-hover:bg-water-500/20 group-hover:text-water-300 transition-all duration-300">
+                        {item.icon}
+                      </div>
+                      <span className="text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">
+                        {item.tag}
+                      </span>
                     </div>
-                    <span className="text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">
-                      {item.tag}
-                    </span>
+                    <h3 className="font-heading text-xl font-semibold text-cream mb-3 group-hover:text-water-200 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-cream/40 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-cream mb-3 group-hover:text-water-200 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-cream/40 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
+                </WaterCard>
               </AnimatedSection>
             ))}
           </div>
