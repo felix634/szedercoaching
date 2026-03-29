@@ -32,7 +32,7 @@ export default function Home() {
       >
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-water.jpg"
+            src="/images/hero.jpg"
             alt="Wasser"
             fill
             className="object-cover"
