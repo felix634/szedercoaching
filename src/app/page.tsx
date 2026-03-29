@@ -228,9 +228,7 @@ export default function Home() {
                     und schließlich eine sichere, starke Schwimmerin.
                   </p>
                   <p className="text-cream/70 font-medium">
-                    Diese Erfahrung prägt meine Arbeit bis heute: Ich unterstütze Kinder
-                    und Erwachsene dabei, ihre Ängste zu überwinden und sich im Wasser
-                    sicher und frei zu fühlen.
+                    Diese Erfahrung prägt meine Arbeit bis heute: Ich begleite Menschen jeden Alters - auch mit besonderen Bedürfnissen - einfühlsam dabei, Vertrauen aufzubauen, Ängste zu überwinden und sich im Wasser sicher und frei zu fühlen.
                   </p>
                 </div>
 
@@ -433,8 +431,8 @@ export default function Home() {
             <AnimatedSection delay={0.4} className="md:col-span-4">
               <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]" disableWave>
                 <Image
-                  src="/images/swimming.jpg"
-                  alt="Schwimmen"
+                  src="/images/szedi.jpg"
+                  alt="Szedi"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
