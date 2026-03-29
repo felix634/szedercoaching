@@ -44,7 +44,7 @@ export default function Home() {
 
         <WaterSurface />
 
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 pb-24">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
