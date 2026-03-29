@@ -10,78 +10,7 @@ import WaterSurface from "@/components/WaterSurface";
 import Marquee from "@/components/Marquee";
 import WaterCard from "@/components/WaterCard";
 
-const angebote = [
-  {
-    title: "Angstabbau im Wasser",
-    desc: "Sanft und einfühlsam begleitet — für Kinder und Erwachsene, die ihre Angst vor dem Wasser Schritt für Schritt überwinden möchten.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-      </svg>
-    ),
-    tag: "Kinder & Erwachsene",
-  },
-  {
-    title: "Schwimmen lernen mit Vertrauen",
-    desc: "Auf Basis von Vertrauen und Sicherheit lernen Sie, sich im Wasser frei und sicher zu bewegen.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
-      </svg>
-    ),
-    tag: "Grundlagen",
-  },
-  {
-    title: "Individuelles Coaching",
-    desc: "Persönliche 1:1 Betreuung, individuell abgestimmt auf Ihre Situation, Ihr Tempo und Ihre Ziele.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-      </svg>
-    ),
-    tag: "1:1",
-  },
-  {
-    title: "Parent Coaching",
-    desc: "Begleitung für Eltern, die gemeinsam mit ihren Kindern die Freude am Wasser entdecken möchten.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197" />
-      </svg>
-    ),
-    tag: "Familie",
-  },
-  {
-    title: "Wassergewöhnung",
-    desc: "Spielerisch und behutsam werden Kinder und Erwachsene ans Wasser herangeführt — ohne Druck.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-      </svg>
-    ),
-    tag: "Einstieg",
-  },
-  {
-    title: "Trauma-sensibles Coaching",
-    desc: "Mit besonderer Achtsamkeit und professionellem Feingefühl begleite ich Sie durch belastende Erfahrungen mit Wasser.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-      </svg>
-    ),
-    tag: "Sensibel",
-  },
-  {
-    title: "Besondere Bedürfnisse",
-    desc: "Inklusives Coaching für Menschen mit Behinderung — wertschätzend, respektvoll und auf Augenhöhe.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-      </svg>
-    ),
-    tag: "Inklusiv",
-  },
-];
+/* Angebote data is inline in the bento grid below */
 
 const stats = [
   { value: "100%", label: "Individuell" },
@@ -359,29 +288,196 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {angebote.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.08}>
-                <WaterCard className="glass-card h-full group">
-                  <div className="p-7">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 group-hover:bg-water-500/20 group-hover:text-water-300 transition-all duration-300">
-                        {item.icon}
-                      </div>
-                      <span className="text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">
-                        {item.tag}
-                      </span>
+          {/* === BENTO GRID === */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+            {/* ROW 1: Hero card (wide) + stacked pair */}
+            <AnimatedSection delay={0.05} className="md:col-span-7">
+              <WaterCard className="glass-card h-full group">
+                <div className="relative p-8 md:p-10 h-full flex flex-col justify-between min-h-[280px]">
+                  <div className="absolute top-6 right-6 md:top-8 md:right-8">
+                    <span className="text-[10px] tracking-wider uppercase text-water-950 bg-water-400 px-3 py-1.5 rounded-full font-semibold">
+                      Beliebtestes Angebot
+                    </span>
+                  </div>
+                  <div>
+                    <div className="w-16 h-16 rounded-2xl bg-water-400/15 border border-water-400/25 flex items-center justify-center text-water-300 mb-6 group-hover:bg-water-400/25 transition-all duration-500">
+                      <svg className="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+                      </svg>
                     </div>
-                    <h3 className="font-heading text-xl font-semibold text-cream mb-3 group-hover:text-water-200 transition-colors">
-                      {item.title}
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-cream mb-3 group-hover:text-water-200 transition-colors">
+                      Angstabbau im Wasser
                     </h3>
-                    <p className="text-cream/40 text-sm leading-relaxed">
-                      {item.desc}
+                    <p className="text-cream/50 text-base leading-relaxed max-w-md">
+                      Sanft und einfühlsam begleitet — für Kinder und Erwachsene,
+                      die ihre Angst vor dem Wasser Schritt für Schritt überwinden möchten.
                     </p>
+                  </div>
+                  <div className="flex items-center gap-3 mt-6">
+                    <span className="text-xs text-water-400 bg-water-400/10 px-3 py-1 rounded-full border border-water-400/15">Kinder</span>
+                    <span className="text-xs text-water-400 bg-water-400/10 px-3 py-1 rounded-full border border-water-400/15">Erwachsene</span>
+                    <span className="text-xs text-water-400 bg-water-400/10 px-3 py-1 rounded-full border border-water-400/15">Alle Level</span>
+                  </div>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
+            <div className="md:col-span-5 flex flex-col gap-5">
+              <AnimatedSection delay={0.1}>
+                <WaterCard className="glass-card group">
+                  <div className="p-7 flex gap-5 items-start">
+                    <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 flex-shrink-0 group-hover:bg-water-500/20 transition-all duration-300">
+                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-lg font-semibold text-cream mb-1.5 group-hover:text-water-200 transition-colors">
+                        Schwimmen lernen mit Vertrauen
+                      </h3>
+                      <p className="text-cream/40 text-sm leading-relaxed">
+                        Auf Basis von Vertrauen und Sicherheit lernen Sie, sich im Wasser frei zu bewegen.
+                      </p>
+                    </div>
                   </div>
                 </WaterCard>
               </AnimatedSection>
-            ))}
+
+              <AnimatedSection delay={0.15}>
+                <WaterCard className="glass-card group">
+                  <div className="p-7 flex gap-5 items-start">
+                    <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 flex-shrink-0 group-hover:bg-water-500/20 transition-all duration-300">
+                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-lg font-semibold text-cream mb-1.5 group-hover:text-water-200 transition-colors">
+                        Individuelles Coaching
+                      </h3>
+                      <p className="text-cream/40 text-sm leading-relaxed">
+                        Persönliche 1:1 Betreuung, individuell abgestimmt auf Ihre Situation und Ziele.
+                      </p>
+                      <span className="inline-block mt-2 text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">1:1</span>
+                    </div>
+                  </div>
+                </WaterCard>
+              </AnimatedSection>
+            </div>
+
+            {/* ROW 2: Image card + wide feature */}
+            <AnimatedSection delay={0.2} className="md:col-span-5">
+              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[260px]">
+                <Image
+                  src="/images/pool.jpg"
+                  alt="Wassergewöhnung"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-water-950 via-water-950/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-water-950/40 to-transparent" />
+                <div className="relative z-20 p-8 flex flex-col justify-end h-full">
+                  <span className="text-[10px] tracking-wider uppercase text-water-300 mb-2 font-medium">Einstieg</span>
+                  <h3 className="font-heading text-2xl font-bold text-cream mb-2">
+                    Wassergewöhnung
+                  </h3>
+                  <p className="text-cream/60 text-sm leading-relaxed max-w-sm">
+                    Spielerisch und behutsam werden Kinder und Erwachsene ans Wasser herangeführt — ohne Druck.
+                  </p>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.25} className="md:col-span-7">
+              <WaterCard className="glass-card h-full group">
+                <div className="p-8 md:p-10 h-full flex flex-col justify-between min-h-[260px]">
+                  <div className="flex items-start justify-between">
+                    <div className="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-400/20 flex items-center justify-center text-rose-400 group-hover:bg-rose-500/20 transition-all duration-300">
+                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                      </svg>
+                    </div>
+                    <span className="text-[10px] tracking-wider uppercase text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-400/15">Sensibel</span>
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-cream mb-3 group-hover:text-water-200 transition-colors">
+                      Trauma-sensibles Coaching
+                    </h3>
+                    <p className="text-cream/50 text-base leading-relaxed max-w-lg">
+                      Mit besonderer Achtsamkeit und professionellem Feingefühl begleite ich Sie
+                      durch belastende Erfahrungen mit Wasser. Ihr Tempo, Ihre Grenzen.
+                    </p>
+                  </div>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
+            {/* ROW 3: Three equal cards */}
+            <AnimatedSection delay={0.3} className="md:col-span-4">
+              <WaterCard className="glass-card h-full group">
+                <div className="p-7">
+                  <div className="w-12 h-12 rounded-xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 mb-5 group-hover:bg-water-500/20 transition-all duration-300">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197" />
+                    </svg>
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-cream mb-2 group-hover:text-water-200 transition-colors">
+                    Parent Coaching
+                  </h3>
+                  <p className="text-cream/40 text-sm leading-relaxed">
+                    Begleitung für Eltern, die gemeinsam mit ihren Kindern die Freude am Wasser entdecken möchten.
+                  </p>
+                  <span className="inline-block mt-4 text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">Familie</span>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.35} className="md:col-span-4">
+              <WaterCard className="glass-card h-full group">
+                <div className="p-7">
+                  <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-400/20 flex items-center justify-center text-amber-400 mb-5 group-hover:bg-amber-500/20 transition-all duration-300">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-cream mb-2 group-hover:text-water-200 transition-colors">
+                    Besondere Bedürfnisse
+                  </h3>
+                  <p className="text-cream/40 text-sm leading-relaxed">
+                    Inklusives Coaching für Menschen mit Behinderung — wertschätzend und auf Augenhöhe.
+                  </p>
+                  <span className="inline-block mt-4 text-[10px] tracking-wider uppercase text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full">Inklusiv</span>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.4} className="md:col-span-4">
+              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]">
+                <Image
+                  src="/images/swimming.jpg"
+                  alt="Schwimmen"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-water-950 via-water-950/60 to-water-950/20" />
+                <div className="relative z-20 p-7 flex flex-col justify-end h-full">
+                  <h3 className="font-heading text-lg font-bold text-cream mb-1">
+                    Freude am Schwimmen
+                  </h3>
+                  <p className="text-cream/60 text-sm">
+                    Entdecken Sie die Freiheit im Wasser.
+                  </p>
+                  <a href="#kontakt" className="inline-flex items-center gap-2 mt-3 text-water-300 text-sm font-medium hover:text-water-200 transition-colors group/link">
+                    Jetzt anfragen
+                    <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </div>
+              </WaterCard>
+            </AnimatedSection>
+
           </div>
         </div>
       </section>
