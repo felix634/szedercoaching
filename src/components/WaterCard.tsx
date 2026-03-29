@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 interface WaterCardProps {
   children: ReactNode;
   className?: string;
+  disableWave?: boolean;
 }
 
 interface Ripple {
@@ -14,7 +15,7 @@ interface Ripple {
   y: number;
 }
 
-export default function WaterCard({ children, className = "" }: WaterCardProps) {
+export default function WaterCard({ children, className = "", disableWave = false }: WaterCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
@@ -80,7 +81,7 @@ export default function WaterCard({ children, className = "" }: WaterCardProps) 
       />
 
       {/* Animated water caustic lines on hover */}
-      <div
+      {!disableWave && <div
         className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-700"
         style={{ opacity: isHovered ? 0.12 : 0 }}
       >
@@ -124,7 +125,7 @@ export default function WaterCard({ children, className = "" }: WaterCardProps) 
           </defs>
           <rect width="100%" height="100%" fill="url(#water-pattern)" />
         </svg>
-      </div>
+      </div>}
 
       {/* Ripple circles */}
       {ripples.map((ripple) => (
@@ -169,7 +170,7 @@ export default function WaterCard({ children, className = "" }: WaterCardProps) 
       ))}
 
       {/* Bottom water wave line on hover */}
-      <div
+      {!disableWave && <div
         className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none z-0 transition-opacity duration-500"
         style={{ opacity: isHovered ? 1 : 0 }}
       >
@@ -195,7 +196,7 @@ export default function WaterCard({ children, className = "" }: WaterCardProps) 
             />
           </path>
         </svg>
-      </div>
+      </div>}
 
       {/* Card content */}
       <div className="relative z-20">{children}</div>

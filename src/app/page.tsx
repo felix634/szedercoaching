@@ -368,7 +368,7 @@ export default function Home() {
 
             {/* ROW 2: Image card + wide feature */}
             <AnimatedSection delay={0.2} className="md:col-span-5">
-              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[260px]">
+              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[260px]" disableWave>
                 <Image
                   src="/images/pool.jpg"
                   alt="Wassergewöhnung"
@@ -453,7 +453,7 @@ export default function Home() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.4} className="md:col-span-4">
-              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]">
+              <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]" disableWave>
                 <Image
                   src="/images/swimming.jpg"
                   alt="Schwimmen"
