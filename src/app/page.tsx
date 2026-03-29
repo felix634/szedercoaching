@@ -89,28 +89,6 @@ export default function Home() {
             für Kinder und Erwachsene mit besonderen Bedürfnissen.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a
-              href="#angebote"
-              className="group px-8 py-4 bg-water-500 hover:bg-water-400 text-white rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl hover:shadow-water-500/30 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
-            >
-              Angebote entdecken
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a
-              href="#kontakt"
-              className="px-8 py-4 border border-cream/20 hover:border-cream/40 text-cream/80 hover:text-cream rounded-full font-semibold text-base transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Kontakt aufnehmen
-            </a>
-          </motion.div>
         </div>
 
         {/* Scroll indicator */}
