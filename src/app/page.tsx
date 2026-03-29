@@ -147,15 +147,15 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <AnimatedSection delay={0.1} direction="left">
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl" />
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
                     src="/images/swimming.jpg"
                     alt="Schwimmen"
                     width={600}
                     height={400}
-                    className="w-full object-cover aspect-[4/3]"
+                    className="w-full object-cover aspect-[4/3] transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
                 </div>

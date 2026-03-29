@@ -199,7 +199,7 @@ export default function WaterCard({ children, className = "", disableWave = fals
       </div>}
 
       {/* Card content */}
-      <div className="relative z-20">{children}</div>
+      <div className="relative z-20 h-full">{children}</div>
     </motion.div>
   );
 }
