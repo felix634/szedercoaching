@@ -8,18 +8,20 @@ interface Bubble {
   size: number;
   duration: number;
   delay: number;
+  opacity: number;
 }
 
-export default function Bubbles({ count = 15 }: { count?: number }) {
+export default function Bubbles({ count = 12 }: { count?: number }) {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
   useEffect(() => {
     const b: Bubble[] = Array.from({ length: count }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
-      size: Math.random() * 20 + 5,
-      duration: Math.random() * 10 + 8,
-      delay: Math.random() * 10,
+      size: Math.random() * 14 + 4,
+      duration: Math.random() * 12 + 10,
+      delay: Math.random() * 15,
+      opacity: Math.random() * 0.15 + 0.05,
     }));
     setBubbles(b);
   }, [count]);
@@ -29,13 +31,14 @@ export default function Bubbles({ count = 15 }: { count?: number }) {
       {bubbles.map((bubble) => (
         <div
           key={bubble.id}
-          className="absolute bottom-0 rounded-full bg-white/10 animate-float-up"
+          className="absolute bottom-0 rounded-full border border-water-400/20 animate-float-up"
           style={{
             left: bubble.left,
             width: bubble.size,
             height: bubble.size,
             animationDuration: `${bubble.duration}s`,
             animationDelay: `${bubble.delay}s`,
+            backgroundColor: `rgba(96, 174, 248, ${bubble.opacity})`,
           }}
         />
       ))}

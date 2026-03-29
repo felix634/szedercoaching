@@ -10,141 +10,165 @@
   --color-water-600: #2570e9;
   --color-water-700: #1d5bd6;
   --color-water-800: #1e4aad;
-  --color-water-900: #1e4189;
-  --color-water-950: #0f2554;
+  --color-water-900: #172e59;
+  --color-water-950: #0c1a35;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-cream: #f0f4f8;
+  --color-cream-dark: #d4dfe8;
+
+  --font-heading: "Playfair Display", "Georgia", serif;
+  --font-body: "DM Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Water ripple animation */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
+body {
+  font-family: var(--font-body);
 }
 
-/* Wave animation */
-@keyframes wave {
-  0% {
-    transform: translateX(0) translateZ(0) scaleY(1);
-  }
-  50% {
-    transform: translateX(-25%) translateZ(0) scaleY(0.55);
-  }
-  100% {
-    transform: translateX(-50%) translateZ(0) scaleY(1);
-  }
+/* ===== NOISE OVERLAY ===== */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 1;
 }
 
-@keyframes wave-slow {
-  0% {
-    transform: translateX(0) translateZ(0) scaleY(1);
-  }
-  50% {
-    transform: translateX(-25%) translateZ(0) scaleY(0.7);
-  }
-  100% {
-    transform: translateX(-50%) translateZ(0) scaleY(1);
-  }
-}
-
-/* Floating bubble animation */
-@keyframes float-up {
-  0% {
-    transform: translateY(100%) scale(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-100vh) scale(1);
-    opacity: 0;
-  }
-}
-
-@keyframes sway {
+/* ===== WATER SURFACE ANIMATION ===== */
+@keyframes water-surface {
   0%, 100% {
-    transform: translateX(0px);
+    d: path("M0,160 C320,120 480,200 640,160 C800,120 960,200 1280,160 L1280,320 L0,320 Z");
   }
   50% {
-    transform: translateX(30px);
+    d: path("M0,180 C320,200 480,140 640,180 C800,200 960,140 1280,180 L1280,320 L0,320 Z");
   }
 }
 
-/* Water caustic light pattern */
-@keyframes caustics {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
+/* ===== MARQUEE ===== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* ===== WAVE ANIMATIONS ===== */
+@keyframes wave {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.55); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
 }
 
 .animate-wave {
   animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
 }
 
-.animate-wave-slow {
-  animation: wave-slow 10s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+/* ===== FLOATING BUBBLES ===== */
+@keyframes float-up {
+  0% { transform: translateY(100%) scale(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.15; }
+  100% { transform: translateY(-100vh) scale(1); opacity: 0; }
 }
 
 .animate-float-up {
   animation: float-up linear infinite;
 }
 
-.animate-sway {
-  animation: sway 3s ease-in-out infinite;
+/* ===== WATER CAUSTICS ===== */
+@keyframes caustics {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
-/* Water caustic overlay effect */
 .water-caustics {
-  background: radial-gradient(ellipse at 20% 50%, rgba(59, 143, 244, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(96, 174, 248, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 40% 80%, rgba(59, 143, 244, 0.12) 0%, transparent 50%);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(59, 143, 244, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(96, 174, 248, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 80%, rgba(59, 143, 244, 0.10) 0%, transparent 50%);
   background-size: 200% 200%;
   animation: caustics 8s ease-in-out infinite;
 }
 
-/* Glassmorphism card */
+/* ===== GLASSMORPHISM ===== */
 .glass-card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(96, 174, 248, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(59, 143, 244, 0.2);
 }
 
-::-webkit-scrollbar-track {
-  background: #0f2554;
+/* ===== GRADIENT TEXT ===== */
+.gradient-text {
+  background: linear-gradient(135deg, #bfdffd 0%, #60aef8 50%, #3b8ff4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #3b8ff4;
-  border-radius: 4px;
+/* ===== WATER SHIMMER (on hover) ===== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #60aef8;
+.water-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(96, 174, 248, 0.15) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0c1a35; }
+::-webkit-scrollbar-thumb { background: #3b8ff4; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #60aef8; }
+
+/* ===== ANIMATED UNDERLINE ===== */
+.animated-underline {
+  position: relative;
+}
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #60aef8, #3b8ff4);
+  border-radius: 2px;
+}
+
+/* ===== SECTION DIVIDER LINE ===== */
+.section-subtitle {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
 }

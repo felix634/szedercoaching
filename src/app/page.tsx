@@ -6,114 +6,157 @@ import Navbar from "@/components/Navbar";
 import Bubbles from "@/components/Bubbles";
 import WaveDivider from "@/components/WaveDivider";
 import AnimatedSection from "@/components/AnimatedSection";
-import WaterRipple from "@/components/WaterRipple";
+import WaterSurface from "@/components/WaterSurface";
+import Marquee from "@/components/Marquee";
 
 const angebote = [
   {
     title: "Angstabbau im Wasser",
-    desc: "Für Kinder & Erwachsene – sanft und einfühlsam begleitet.",
-    icon: "🌊",
+    desc: "Sanft und einfühlsam begleitet — für Kinder und Erwachsene, die ihre Angst vor dem Wasser Schritt für Schritt überwinden möchten.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+      </svg>
+    ),
+    tag: "Kinder & Erwachsene",
   },
   {
     title: "Schwimmen lernen mit Vertrauen",
-    desc: "Schritt für Schritt zu mehr Sicherheit im Wasser.",
-    icon: "🏊",
+    desc: "Auf Basis von Vertrauen und Sicherheit lernen Sie, sich im Wasser frei und sicher zu bewegen.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
+      </svg>
+    ),
+    tag: "Grundlagen",
   },
   {
-    title: "Individuelles Coaching (1:1)",
-    desc: "Persönliche Betreuung, abgestimmt auf Ihre Bedürfnisse.",
-    icon: "🤝",
+    title: "Individuelles Coaching",
+    desc: "Persönliche 1:1 Betreuung, individuell abgestimmt auf Ihre Situation, Ihr Tempo und Ihre Ziele.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+      </svg>
+    ),
+    tag: "1:1",
   },
   {
     title: "Parent Coaching",
-    desc: "Begleitung für Eltern – gemeinsam Ängste überwinden.",
-    icon: "👨‍👩‍👧",
+    desc: "Begleitung für Eltern, die gemeinsam mit ihren Kindern die Freude am Wasser entdecken möchten.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197" />
+      </svg>
+    ),
+    tag: "Familie",
   },
   {
     title: "Wassergewöhnung",
-    desc: "Spielerisch und behutsam ans Wasser heranführen.",
-    icon: "💧",
+    desc: "Spielerisch und behutsam werden Kinder und Erwachsene ans Wasser herangeführt — ohne Druck.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+      </svg>
+    ),
+    tag: "Einstieg",
   },
   {
     title: "Trauma-sensibles Coaching",
-    desc: "Mit besonderer Achtsamkeit und professionellem Feingefühl.",
-    icon: "🩵",
+    desc: "Mit besonderer Achtsamkeit und professionellem Feingefühl begleite ich Sie durch belastende Erfahrungen mit Wasser.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    ),
+    tag: "Sensibel",
   },
   {
-    title: "Coaching für besondere Bedürfnisse",
-    desc: "Für Menschen mit Behinderung – inklusiv und wertschätzend.",
-    icon: "⭐",
+    title: "Besondere Bedürfnisse",
+    desc: "Inklusives Coaching für Menschen mit Behinderung — wertschätzend, respektvoll und auf Augenhöhe.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+      </svg>
+    ),
+    tag: "Inklusiv",
   },
+];
+
+const stats = [
+  { value: "100%", label: "Individuell" },
+  { value: "1:1", label: "Betreuung" },
+  { value: "∞", label: "Geduld" },
+  { value: "♡", label: "Mit Herz" },
 ];
 
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
-      <Bubbles />
+      <Bubbles count={10} />
       <Navbar />
 
-      {/* ===== HERO SECTION ===== */}
+      {/* ===== HERO ===== */}
       <section
         id="start"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center noise-overlay"
       >
-        {/* Background image with overlay */}
         <div className="absolute inset-0">
           <Image
             src="/images/hero-water.jpg"
-            alt="Wasser Hintergrund"
+            alt="Wasser"
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-water-950/80 via-water-900/70 to-water-950/90" />
-          <div className="absolute inset-0 water-caustics" />
+          <div className="absolute inset-0 bg-gradient-to-b from-water-950/70 via-water-950/50 to-water-950" />
+          <div className="absolute inset-0 water-caustics opacity-40" />
         </div>
 
-        <WaterRipple />
+        <WaterSurface />
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <Image
               src="/images/logo.png"
               alt="Szeder Coaching Logo"
-              width={160}
-              height={160}
-              className="mx-auto mb-8 rounded-full shadow-2xl shadow-water-500/30 w-28 h-28 md:w-40 md:h-40"
+              width={140}
+              height={140}
+              className="mx-auto mb-10 rounded-full w-24 h-24 md:w-36 md:h-36 shadow-2xl shadow-water-500/20"
             />
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="section-subtitle text-water-400 mb-6"
+          >
+            Schwimmcoaching mit Herz
+          </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
+            transition={{ duration: 1, delay: 0.4 }}
+            className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight"
           >
-            <span className="bg-gradient-to-r from-white via-water-200 to-water-400 bg-clip-text text-transparent">
-              Szeder Coaching
-            </span>
+            <span className="text-cream">Vertrauen lernen.</span>
+            <br />
+            <span className="gradient-text">Freiheit erleben.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-xl md:text-2xl text-water-200 mb-4 font-light"
-          >
-            Vertrauen lernen. Ängste überwinden. Freude am Schwimmen.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-lg md:text-xl text-water-300/80 mb-10 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            Freiheit erleben.
+            Ängste überwinden und die Freude am Schwimmen entdecken —
+            für Kinder und Erwachsene mit besonderen Bedürfnissen.
           </motion.p>
 
           <motion.div
@@ -124,13 +167,16 @@ export default function Home() {
           >
             <a
               href="#angebote"
-              className="px-8 py-4 bg-water-500 hover:bg-water-400 text-white rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-water-500/40 hover:-translate-y-1"
+              className="group px-8 py-4 bg-water-500 hover:bg-water-400 text-white rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl hover:shadow-water-500/30 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
             >
               Angebote entdecken
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </a>
             <a
               href="#kontakt"
-              className="px-8 py-4 border-2 border-water-400/50 hover:border-water-400 text-water-200 hover:text-white rounded-full font-semibold text-lg transition-all duration-300 hover:-translate-y-1"
+              className="px-8 py-4 border border-cream/20 hover:border-cream/40 text-cream/80 hover:text-cream rounded-full font-semibold text-base transition-all duration-300 hover:-translate-y-0.5"
             >
               Kontakt aufnehmen
             </a>
@@ -142,86 +188,153 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
+          <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">Scrollen</span>
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-water-400/50 rounded-full flex justify-center pt-2"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <motion.div className="w-1.5 h-1.5 bg-water-400 rounded-full" />
+            <svg className="w-5 h-5 text-cream/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* ===== STORY / MOTTO ===== */}
-      <WaveDivider colorFrom="#0f2554" colorTo="#1e4189" />
-      <section className="relative bg-water-900 py-20 md:py-28">
-        <div className="absolute inset-0 water-caustics opacity-30" />
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <AnimatedSection>
-            <p className="text-lg md:text-xl text-water-200 leading-relaxed italic">
-              &ldquo;Inspiriert von Szeder – einer geretteten Labrador-Hündin,
-              die ihre Angst vor Wasser überwand und ihre Stärke
-              entdeckte.&rdquo;
-            </p>
-            <p className="mt-4 text-water-400 font-medium">
-              Heute begleite ich Kinder und Erwachsene auf genau diesem Weg.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-      <WaveDivider colorFrom="#1e4189" colorTo="#0f2554" flip />
+      {/* ===== MARQUEE ===== */}
+      <Marquee />
 
-      {/* ===== ÜBER MICH ===== */}
-      <section id="über-mich" className="relative py-20 md:py-28 bg-water-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ===== SZEDER STORY ===== */}
+      <section id="geschichte" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
-              <span className="bg-gradient-to-r from-water-300 to-water-500 bg-clip-text text-transparent">
-                Über mich
-              </span>
+            <p className="section-subtitle text-water-500 mb-4 text-center">Die Geschichte</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16 leading-tight">
+              Inspiriert von <span className="gradient-text italic">Szeder</span>
             </h2>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <AnimatedSection delay={0.2}>
-              <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-water-500/20 to-water-700/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <AnimatedSection delay={0.1} direction="left">
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl" />
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
-                    src="/images/coach_photo.jpg"
-                    alt="Eszter Bary – Schwimmcoach"
+                    src="/images/swimming.jpg"
+                    alt="Schwimmen"
                     width={600}
-                    height={700}
-                    className="w-full object-cover rounded-2xl hover:scale-105 transition-transform duration-700"
+                    height={400}
+                    className="w-full object-cover aspect-[4/3]"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
                 </div>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.4}>
+            <AnimatedSection delay={0.2} direction="right">
               <div className="space-y-6">
-                <h3 className="text-2xl md:text-3xl font-semibold text-water-200">
-                  Eszter Bary
+                <blockquote className="font-heading text-2xl md:text-3xl italic text-cream/90 leading-relaxed border-l-2 border-water-500 pl-6">
+                  &ldquo;Aus Unsicherheit wurde Freude – und schließlich eine sichere, starke Schwimmerin.&rdquo;
+                </blockquote>
+                <div className="space-y-4 text-cream/50 text-base leading-relaxed pl-6">
+                  <p>
+                    Szeder war meine geliebte Labrador-Hündin, die ich aus dem Tierheim gerettet habe.
+                    Obwohl sie ein Wasserhund war, hatte sie große Angst vor dem Wasser.
+                  </p>
+                  <p>
+                    Mit Geduld, Vertrauen und einfühlsamer Begleitung habe ich ihr geholfen,
+                    diese Angst Schritt für Schritt zu überwinden.
+                  </p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== STATS ===== */}
+      <section className="relative py-16 bg-water-900/40 border-y border-water-800/20 noise-overlay">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, i) => (
+              <AnimatedSection key={stat.label} delay={i * 0.1}>
+                <div className="text-center">
+                  <p className="font-heading text-4xl md:text-5xl font-bold gradient-text mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-cream/40 text-sm tracking-wide uppercase">
+                    {stat.label}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== ÜBER MICH ===== */}
+      <section id="über-mich" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
+          <AnimatedSection>
+            <p className="section-subtitle text-water-500 mb-4 text-center">Schwimmcoach</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16">
+              Über <span className="gradient-text">mich</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+            <AnimatedSection delay={0.1} direction="left" className="md:col-span-2">
+              <div className="relative group">
+                <div className="absolute -inset-3 bg-gradient-to-br from-water-400/15 via-water-600/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="relative overflow-hidden rounded-2xl border border-water-800/30">
+                  <Image
+                    src="/images/coach_photo.jpg"
+                    alt="Eszter Bary – Schwimmcoach"
+                    width={500}
+                    height={650}
+                    className="w-full object-cover aspect-[3/4] transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-water-950/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="font-heading text-xl font-semibold text-cream">Eszter Bary</p>
+                    <p className="text-water-400 text-sm">Schwimmcoach & Gründerin</p>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.3} direction="right" className="md:col-span-3">
+              <div className="space-y-6">
+                <h3 className="font-heading text-2xl md:text-3xl font-semibold text-cream animated-underline inline-block pb-2">
+                  Meine Mission
                 </h3>
-                <div className="space-y-4 text-water-300 text-lg leading-relaxed">
+                <div className="space-y-5 text-cream/50 text-base md:text-lg leading-relaxed">
                   <p>
-                    Szeder war meine geliebte Labrador-Hündin, die ich aus dem
-                    Tierheim gerettet habe. Obwohl sie ein Wasserhund war, hatte
-                    sie große Angst vor dem Wasser.
+                    Szeder war meine geliebte Labrador-Hündin, die ich aus dem Tierheim gerettet habe.
+                    Obwohl sie ein Wasserhund war, hatte sie große Angst vor dem Wasser.
                   </p>
                   <p>
-                    Mit Geduld, Vertrauen und einfühlsamer Begleitung habe ich
-                    ihr geholfen, diese Angst Schritt für Schritt zu überwinden.
-                    Aus Unsicherheit wurde Freude – und schließlich eine sichere,
-                    starke Schwimmerin.
+                    Mit Geduld, Vertrauen und einfühlsamer Begleitung habe ich ihr geholfen,
+                    diese Angst Schritt für Schritt zu überwinden. Aus Unsicherheit wurde Freude –
+                    und schließlich eine sichere, starke Schwimmerin.
                   </p>
-                  <p>
-                    Diese Erfahrung prägt meine Arbeit bis heute: Ich
-                    unterstütze Kinder und Erwachsene dabei, ihre Ängste zu
-                    überwinden und sich im Wasser sicher und frei zu fühlen.
+                  <p className="text-cream/70 font-medium">
+                    Diese Erfahrung prägt meine Arbeit bis heute: Ich unterstütze Kinder
+                    und Erwachsene dabei, ihre Ängste zu überwinden und sich im Wasser
+                    sicher und frei zu fühlen.
                   </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3 pt-4">
+                  {["Einfühlsam", "Geduldig", "Professionell", "Inklusiv"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-4 py-1.5 rounded-full bg-water-500/10 border border-water-500/20 text-water-400 text-xs tracking-wider uppercase"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </AnimatedSection>
@@ -230,269 +343,194 @@ export default function Home() {
       </section>
 
       {/* ===== ANGEBOTE ===== */}
-      <WaveDivider colorFrom="#0f2554" colorTo="#1e4aad" />
-      <section id="angebote" className="relative bg-water-800 py-20 md:py-28">
-        <div className="absolute inset-0 water-caustics opacity-20" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <WaveDivider colorFrom="#0c1a35" colorTo="#172e59" />
+      <section id="angebote" className="relative bg-water-900 py-24 md:py-36 noise-overlay">
+        <div className="absolute inset-0 water-caustics opacity-15" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-6">
-              <span className="bg-gradient-to-r from-water-200 to-white bg-clip-text text-transparent">
-                Meine Angebote
-              </span>
+            <p className="section-subtitle text-water-400 mb-4 text-center">Was ich anbiete</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
+              Meine <span className="gradient-text">Angebote</span>
             </h2>
-            <p className="text-center text-water-300 text-lg mb-16 max-w-2xl mx-auto">
-              Jeder Mensch verdient es, sich im Wasser sicher zu fühlen. Meine
-              Angebote sind individuell auf Ihre Bedürfnisse abgestimmt.
+            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
+              Jeder Mensch verdient es, sich im Wasser sicher zu fühlen.
+              Meine Angebote sind individuell auf Ihre Bedürfnisse abgestimmt.
             </p>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {angebote.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  className="glass-card rounded-2xl p-6 h-full hover:shadow-xl hover:shadow-water-500/10 transition-shadow duration-300"
-                >
-                  <span className="text-4xl mb-4 block">{item.icon}</span>
-                  <h3 className="text-xl font-semibold text-white mb-2">
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <div className="glass-card rounded-2xl p-7 h-full group cursor-default">
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-14 h-14 rounded-2xl bg-water-500/10 border border-water-500/20 flex items-center justify-center text-water-400 group-hover:bg-water-500/20 group-hover:text-water-300 transition-all duration-300">
+                      {item.icon}
+                    </div>
+                    <span className="text-[10px] tracking-wider uppercase text-water-500 bg-water-500/10 px-3 py-1 rounded-full">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-cream mb-3 group-hover:text-water-200 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-water-300">{item.desc}</p>
-                </motion.div>
+                  <p className="text-cream/40 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
-      <WaveDivider colorFrom="#1e4aad" colorTo="#0f2554" flip />
+      <WaveDivider colorFrom="#172e59" colorTo="#0c1a35" flip />
 
-      {/* ===== PARALLAX IMAGE SECTION ===== */}
-      <section className="relative h-[40vh] md:h-[50vh] overflow-hidden">
+      {/* ===== PARALLAX QUOTE ===== */}
+      <section className="relative py-32 md:py-44 overflow-hidden noise-overlay">
         <div
-          className="absolute inset-0 bg-fixed bg-cover bg-center"
+          className="absolute inset-0 bg-fixed bg-cover bg-center scale-110"
           style={{ backgroundImage: "url(/images/pool.jpg)" }}
         />
-        <div className="absolute inset-0 bg-water-950/60" />
-        <div className="relative z-10 flex items-center justify-center h-full">
+        <div className="absolute inset-0 bg-water-950/75" />
+        <div className="absolute inset-0 water-caustics opacity-20" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <AnimatedSection>
-            <p className="text-2xl md:text-4xl font-bold text-center text-white px-4 max-w-3xl">
-              &ldquo;Aus Unsicherheit wurde Freude – und schließlich eine
-              sichere, starke Schwimmerin.&rdquo;
+            <svg className="w-10 h-10 text-water-500/40 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+            </svg>
+            <p className="font-heading text-3xl md:text-5xl font-semibold text-cream leading-tight italic mb-6">
+              Inspiriert von Szeder – einer geretteten Labrador-Hündin,
+              die ihre Angst vor Wasser überwand.
+            </p>
+            <p className="text-cream/40 text-base">
+              Heute begleite ich Kinder und Erwachsene auf genau diesem Weg.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
       {/* ===== KONTAKT ===== */}
-      <section id="kontakt" className="relative py-20 md:py-28 bg-water-950">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="kontakt" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
-              <span className="bg-gradient-to-r from-water-300 to-water-500 bg-clip-text text-transparent">
-                Kontakt
-              </span>
+            <p className="section-subtitle text-water-500 mb-4 text-center">Lassen Sie uns sprechen</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16">
+              <span className="gradient-text">Kontakt</span>
             </h2>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 gap-10">
-            <AnimatedSection delay={0.2}>
-              <div className="glass-card rounded-2xl p-8 space-y-6">
-                <h3 className="text-2xl font-semibold text-white mb-4">
-                  Nehmen Sie Kontakt auf
+            {/* Contact info */}
+            <AnimatedSection delay={0.1} direction="left">
+              <div className="glass-card rounded-2xl p-8 md:p-10 h-full hover:transform-none">
+                <h3 className="font-heading text-2xl font-semibold text-cream mb-8 animated-underline inline-block pb-2">
+                  Kontaktdaten
                 </h3>
 
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-water-500/20 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-5 h-5 text-water-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
+                <div className="space-y-6">
+                  {[
+                    {
+                      label: "Name",
+                      value: "Eszter Bary",
+                      icon: (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                      ),
+                    },
+                    {
+                      label: "Telefon",
+                      value: "0667 615 26206",
+                      href: "tel:+4366761526206",
+                      icon: (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                      ),
+                    },
+                    {
+                      label: "E-Mail",
+                      value: "eszter.joga@gmail.com",
+                      href: "mailto:eszter.joga@gmail.com",
+                      icon: (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      ),
+                    },
+                    {
+                      label: "Ort",
+                      value: "Nordburgenland – Eisenstadt und Umgebung",
+                      icon: (
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                      ),
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-start gap-4 group">
+                      <div className="w-11 h-11 rounded-xl bg-water-500/10 border border-water-500/15 flex items-center justify-center flex-shrink-0 group-hover:bg-water-500/20 transition-colors">
+                        <svg className="w-5 h-5 text-water-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          {item.icon}
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-water-500 text-xs tracking-wider uppercase mb-1">{item.label}</p>
+                        {item.href ? (
+                          <a href={item.href} className="text-cream text-base hover:text-water-300 transition-colors break-all">
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="text-cream text-base">{item.value}</p>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-water-400 text-sm">Name</p>
-                      <p className="text-white text-lg">Eszter Bary</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-water-500/20 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-5 h-5 text-water-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-water-400 text-sm">Telefon</p>
-                      <a
-                        href="tel:+4366761526206"
-                        className="text-white text-lg hover:text-water-400 transition-colors"
-                      >
-                        0667 615 26206
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-water-500/20 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-5 h-5 text-water-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-water-400 text-sm">E-Mail</p>
-                      <a
-                        href="mailto:eszter.joga@gmail.com"
-                        className="text-white text-lg hover:text-water-400 transition-colors break-all"
-                      >
-                        eszter.joga@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-water-500/20 flex items-center justify-center flex-shrink-0">
-                      <svg
-                        className="w-5 h-5 text-water-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-water-400 text-sm">Ort</p>
-                      <p className="text-white text-lg">
-                        Nordburgenland – Eisenstadt und Umgebung
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.4}>
+            {/* Contact form */}
+            <AnimatedSection delay={0.2} direction="right">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   const form = e.target as HTMLFormElement;
-                  const name = (
-                    form.elements.namedItem("name") as HTMLInputElement
-                  ).value;
-                  const email = (
-                    form.elements.namedItem("email") as HTMLInputElement
-                  ).value;
-                  const message = (
-                    form.elements.namedItem("message") as HTMLTextAreaElement
-                  ).value;
+                  const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+                  const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+                  const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
                   window.location.href = `mailto:eszter.joga@gmail.com?subject=Anfrage von ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`)}`;
                 }}
-                className="glass-card rounded-2xl p-8 space-y-5"
+                className="glass-card rounded-2xl p-8 md:p-10 hover:transform-none"
               >
-                <h3 className="text-2xl font-semibold text-white mb-4">
-                  Schreiben Sie mir
+                <h3 className="font-heading text-2xl font-semibold text-cream mb-8 animated-underline inline-block pb-2">
+                  Nachricht senden
                 </h3>
 
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-water-400 text-sm mb-1"
+                <div className="space-y-5">
+                  <div>
+                    <label htmlFor="name" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Name</label>
+                    <input
+                      type="text" id="name" name="name" required
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                      placeholder="Ihr Name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-water-400 text-xs tracking-wider uppercase mb-2">E-Mail</label>
+                    <input
+                      type="email" id="email" name="email" required
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                      placeholder="Ihre E-Mail-Adresse"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Nachricht</label>
+                    <textarea
+                      id="message" name="message" required rows={5}
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all resize-none text-sm"
+                      placeholder="Ihre Nachricht..."
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-water-500/20 mt-2"
                   >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full bg-water-900/50 border border-water-700/50 rounded-xl px-4 py-3 text-white placeholder-water-500 focus:outline-none focus:border-water-400 transition-colors"
-                    placeholder="Ihr Name"
-                  />
+                    Nachricht senden
+                  </button>
                 </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-water-400 text-sm mb-1"
-                  >
-                    E-Mail
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full bg-water-900/50 border border-water-700/50 rounded-xl px-4 py-3 text-white placeholder-water-500 focus:outline-none focus:border-water-400 transition-colors"
-                    placeholder="Ihre E-Mail-Adresse"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-water-400 text-sm mb-1"
-                  >
-                    Nachricht
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={4}
-                    className="w-full bg-water-900/50 border border-water-700/50 rounded-xl px-4 py-3 text-white placeholder-water-500 focus:outline-none focus:border-water-400 transition-colors resize-none"
-                    placeholder="Ihre Nachricht..."
-                  />
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  type="submit"
-                  className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-lg transition-colors duration-300"
-                >
-                  Nachricht senden
-                </motion.button>
               </form>
             </AnimatedSection>
           </div>
@@ -500,25 +538,40 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="relative">
-        <WaveDivider colorFrom="#0f2554" colorTo="#1e4189" />
-        <div className="bg-water-900 py-10">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
+      <footer className="border-t border-water-800/20 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
               <Image
                 src="/images/logo.png"
                 alt="Szeder Coaching"
-                width={36}
-                height={36}
+                width={32}
+                height={32}
                 className="rounded-full"
               />
-              <span className="text-lg font-semibold text-white">
-                Szeder <span className="text-water-400">Coaching</span>
-              </span>
+              <div>
+                <span className="font-heading text-base font-semibold text-cream">
+                  Szeder <span className="text-water-400">Coaching</span>
+                </span>
+              </div>
             </div>
-            <p className="text-water-400 text-sm">
-              &copy; {new Date().getFullYear()} Szeder Coaching – Eszter Bary.
-              Alle Rechte vorbehalten.
+
+            <div className="flex flex-wrap gap-8 text-sm text-cream/30">
+              {[
+                { href: "#start", label: "Start" },
+                { href: "#geschichte", label: "Geschichte" },
+                { href: "#über-mich", label: "Über mich" },
+                { href: "#angebote", label: "Angebote" },
+                { href: "#kontakt", label: "Kontakt" },
+              ].map((link) => (
+                <a key={link.href} href={link.href} className="hover:text-cream/60 transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <p className="text-cream/20 text-xs">
+              &copy; {new Date().getFullYear()} Szeder Coaching
             </p>
           </div>
         </div>
