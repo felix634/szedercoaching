@@ -9,8 +9,37 @@ import AnimatedSection from "@/components/AnimatedSection";
 import WaterSurface from "@/components/WaterSurface";
 import Marquee from "@/components/Marquee";
 import WaterCard from "@/components/WaterCard";
+import ImageCarousel from "@/components/ImageCarousel";
 
 /* Angebote data is inline in the bento grid below */
+
+const galleryGroups = [
+  {
+    title: "Erste Schritte",
+    images: [
+      "/images/kind1/one.jpg",
+      "/images/kind1/two.jpg",
+      "/images/kind1/three.jpg",
+      "/images/kind1/four.jpg",
+      "/images/kind1/five.jpg",
+      "/images/kind1/six.jpg",
+      "/images/kind1/seven.jpg",
+      "/images/kind1/eight.jpg",
+    ],
+  },
+  {
+    title: "Vertrauen wächst",
+    images: ["/images/kind2/1.jpg"],
+  },
+  {
+    title: "Freude am Wasser",
+    images: ["/images/kind3/1.jpg", "/images/kind3/2.jpg", "/images/kind3/3.jpg"],
+  },
+  {
+    title: "Sicher schwimmen",
+    images: ["/images/kind5/1.png", "/images/kind5/2.png", "/images/kind5/3.jpg"],
+  },
+];
 
 const stats = [
   { value: "100%", label: "Individuell" },
@@ -484,6 +513,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== GALERIE ===== */}
+      <section id="galerie" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+          <AnimatedSection>
+            <p className="section-subtitle text-water-500 mb-4 text-center">Augenblicke</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
+              Momente im <span className="gradient-text">Wasser</span>
+            </h2>
+            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
+              Echte Augenblicke aus dem Coaching — blättern Sie durch die Bilder
+              und erleben Sie, wie aus Unsicherheit Freude wird.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            {galleryGroups.map((group, i) => (
+              <AnimatedSection key={group.title} delay={i * 0.1}>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-water-800/30">
+                    <ImageCarousel images={group.images} alt={group.title} />
+                    <div className="absolute bottom-0 left-0 right-0 z-10 p-6 pointer-events-none">
+                      <h3 className="font-heading text-xl md:text-2xl font-semibold text-cream">
+                        {group.title}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== KONTAKT ===== */}
       <section id="kontakt" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
@@ -637,6 +700,7 @@ export default function Home() {
                 { href: "#geschichte", label: "Geschichte" },
                 { href: "#über-mich", label: "Über mich" },
                 { href: "#angebote", label: "Angebote" },
+                { href: "#galerie", label: "Galerie" },
                 { href: "#kontakt", label: "Kontakt" },
               ].map((link) => (
                 <a key={link.href} href={link.href} className="hover:text-cream/60 transition-colors">

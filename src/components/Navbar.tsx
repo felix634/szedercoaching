@@ -9,6 +9,7 @@ const navLinks = [
   { href: "#geschichte", label: "Geschichte" },
   { href: "#über-mich", label: "Über mich" },
   { href: "#angebote", label: "Angebote" },
+  { href: "#galerie", label: "Galerie" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
