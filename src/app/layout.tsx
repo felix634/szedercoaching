@@ -109,15 +109,16 @@ const jsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Eisenstadt",
+    streetAddress: "Krensdorferstraße 10",
+    addressLocality: "Hirm",
     addressRegion: "Burgenland",
-    postalCode: "7000",
+    postalCode: "7024",
     addressCountry: "AT",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 47.8457,
-    longitude: 16.526,
+    latitude: 47.7865,
+    longitude: 16.4546,
   },
   areaServed: {
     "@type": "AdministrativeArea",
