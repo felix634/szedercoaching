@@ -39,6 +39,10 @@ const galleryGroups = [
     title: "Sicher schwimmen",
     images: ["/images/kind5/1.png", "/images/kind5/2.png", "/images/kind5/3.jpg"],
   },
+  {
+    title: "Mit Herz begleitet",
+    images: ["/images/kind6/1.jpg", "/images/kind6/2.jpg"],
+  },
 ];
 
 const stats = [
@@ -62,7 +66,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <Image
             src="/images/hero.jpg"
-            alt="Wasser"
+            alt="Ruhige Wasseroberfläche – Schwimmcoaching mit Herz bei Szeder Coaching"
             fill
             className="object-cover"
             priority
@@ -159,7 +163,7 @@ export default function Home() {
                 <div className="relative overflow-hidden rounded-2xl">
                   <Image
                     src="/images/szedi.jpg"
-                    alt="Szedi"
+                    alt="Szeder – die gerettete Labrador-Hündin, die ihre Angst vor dem Wasser überwand"
                     width={600}
                     height={600}
                     className="w-full object-cover aspect-square transition-transform duration-700 group-hover:scale-[1.03]"
@@ -376,7 +380,7 @@ export default function Home() {
               <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[260px]" disableWave>
                 <Image
                   src="/images/pool.jpg"
-                  alt="Wassergewöhnung"
+                  alt="Wassergewöhnung im Pool – behutsamer Einstieg ins Schwimmen"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -461,7 +465,7 @@ export default function Home() {
               <WaterCard className="relative overflow-hidden rounded-2xl group h-full min-h-[220px]" disableWave>
                 <Image
                   src="/images/swimming.jpg"
-                  alt="Schwimmen"
+                  alt="Freude am Schwimmen – Freiheit und Sicherheit im Wasser"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -576,8 +580,8 @@ export default function Home() {
                     },
                     {
                       label: "Telefon",
-                      value: "0667 615 26206",
-                      href: "tel:+4366761526206",
+                      value: "+43 677 6152 6206",
+                      href: "tel:+4367761526206",
                       icon: (
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                       ),
@@ -662,6 +666,19 @@ export default function Home() {
                       placeholder="Ihre Nachricht..."
                     />
                   </div>
+                  <div className="flex items-start gap-3 pt-1">
+                    <input
+                      type="checkbox" id="privacy" name="privacy" required
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 accent-water-500"
+                    />
+                    <label htmlFor="privacy" className="text-cream/40 text-xs leading-relaxed">
+                      Ich habe die{" "}
+                      <a href="/datenschutz" className="text-water-300 underline hover:text-water-200 transition-colors">
+                        Datenschutzerklärung
+                      </a>{" "}
+                      gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.
+                    </label>
+                  </div>
                   <button
                     type="submit"
                     className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-water-500/20 mt-2"
@@ -712,6 +729,16 @@ export default function Home() {
             <p className="text-cream/20 text-xs">
               &copy; {new Date().getFullYear()} Szeder Coaching
             </p>
+          </div>
+
+          {/* Legal links */}
+          <div className="mt-8 pt-6 border-t border-water-800/20 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-cream/30">
+            <a href="/impressum" className="hover:text-cream/60 transition-colors">
+              Impressum
+            </a>
+            <a href="/datenschutz" className="hover:text-cream/60 transition-colors">
+              Datenschutz
+            </a>
           </div>
         </div>
       </footer>

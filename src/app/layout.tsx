@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Szeder Coaching – Schwimmcoaching mit Herz",
@@ -63,10 +63,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/hero.jpg"],
+    images: ["/images/og-image.jpg"],
   },
   icons: {
-    icon: [{ url: "/images/favicon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/images/favicon.svg", type: "image/svg+xml" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180" }],
   },
   robots: {
     index: true,
@@ -83,26 +88,65 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#business`,
   name: SITE_NAME,
   description: SITE_DESCRIPTION,
+  slogan: "Vertrauen lernen. Freiheit erleben.",
   url: SITE_URL,
-  image: `${SITE_URL}/images/hero.jpg`,
+  image: [
+    `${SITE_URL}/images/og-image.jpg`,
+    `${SITE_URL}/images/hero.jpg`,
+    `${SITE_URL}/images/pool.jpg`,
+  ],
   logo: `${SITE_URL}/images/logo.png`,
-  telephone: "+4366761526206",
+  telephone: "+4367761526206",
   email: "eszter.joga@gmail.com",
+  inLanguage: "de-AT",
   founder: {
     "@type": "Person",
     name: "Eszter Bary",
+    jobTitle: "Schwimmcoach",
   },
   address: {
     "@type": "PostalAddress",
     addressLocality: "Eisenstadt",
     addressRegion: "Burgenland",
+    postalCode: "7000",
     addressCountry: "AT",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 47.8457,
+    longitude: 16.526,
   },
   areaServed: {
     "@type": "AdministrativeArea",
     name: "Nordburgenland – Eisenstadt und Umgebung",
+  },
+  knowsAbout: [
+    "Schwimmcoaching",
+    "Angstabbau im Wasser",
+    "Wassergewöhnung",
+    "Trauma-sensibles Coaching",
+    "Inklusives Schwimmen",
+    "Schwimmen lernen für Erwachsene",
+    "Schwimmen lernen für Kinder",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Angebote",
+    itemListElement: [
+      "Angstabbau im Wasser",
+      "Schwimmen lernen mit Vertrauen",
+      "Wassergewöhnung",
+      "Individuelles 1:1 Coaching",
+      "Trauma-sensibles Coaching",
+      "Parent Coaching",
+      "Coaching für Menschen mit besonderen Bedürfnissen",
+    ].map((name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    })),
   },
   priceRange: "€€",
 };
@@ -113,7 +157,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="de-AT" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="antialiased bg-water-950 text-cream overflow-x-hidden">
         <script
           type="application/ld+json"
