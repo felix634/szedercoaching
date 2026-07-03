@@ -32,7 +32,7 @@ export default function ImpressumPage() {
           Telefon: <a href="tel:+4367761526206">+43 677 6152 6206</a>
         </li>
         <li>
-          E-Mail: <a href="mailto:eszter.joga@gmail.com">eszter.joga@gmail.com</a>
+          E-Mail: <a href="mailto:eszterbary@szedercoaching.at">eszterbary@szedercoaching.at</a>
         </li>
         <li>
           Web: <a href="https://www.szedercoaching.at">www.szedercoaching.at</a>

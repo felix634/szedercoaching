@@ -588,8 +588,8 @@ export default function Home() {
                     },
                     {
                       label: "E-Mail",
-                      value: "eszter.joga@gmail.com",
-                      href: "mailto:eszter.joga@gmail.com",
+                      value: "eszterbary@szedercoaching.at",
+                      href: "mailto:eszterbary@szedercoaching.at",
                       icon: (
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                       ),
@@ -633,7 +633,7 @@ export default function Home() {
                   const name = (form.elements.namedItem("name") as HTMLInputElement).value;
                   const email = (form.elements.namedItem("email") as HTMLInputElement).value;
                   const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-                  window.location.href = `mailto:eszter.joga@gmail.com?subject=Anfrage von ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`)}`;
+                  window.location.href = `mailto:eszterbary@szedercoaching.at?subject=Anfrage von ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`)}`;
                 }}
                 className="glass-card rounded-2xl p-8 md:p-10 hover:transform-none"
               >

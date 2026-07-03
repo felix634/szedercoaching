@@ -26,7 +26,7 @@ export default function DatenschutzPage() {
         <br />
         7024 Hirm, Österreich
         <br />
-        E-Mail: <a href="mailto:eszter.joga@gmail.com">eszter.joga@gmail.com</a>
+        E-Mail: <a href="mailto:eszterbary@szedercoaching.at">eszterbary@szedercoaching.at</a>
         <br />
         Telefon: <a href="tel:+4367761526206">+43 677 6152 6206</a>
       </address>

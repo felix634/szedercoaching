@@ -100,7 +100,7 @@ const jsonLd = {
   ],
   logo: `${SITE_URL}/images/logo.png`,
   telephone: "+4367761526206",
-  email: "eszter.joga@gmail.com",
+  email: "eszterbary@szedercoaching.at",
   inLanguage: "de-AT",
   founder: {
     "@type": "Person",
