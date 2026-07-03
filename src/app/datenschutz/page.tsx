@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/datenschutz" },
 };
 
-// ⚠️ Vor dem Launch die gelb markierten Platzhalter ([…]) ersetzen:
-// Adresse der Verantwortlichen sowie Name/Anschrift des Hosting-Anbieters.
 export default function DatenschutzPage() {
   return (
     <LegalPage
@@ -50,7 +48,7 @@ export default function DatenschutzPage() {
         Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren und stabilen Betrieb).
       </p>
       <p>
-        Hosting-Anbieter: Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. Mit dem Anbieter besteht ein
+        Hosting-Anbieter: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA. Mit dem Anbieter besteht ein
         Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Eine Verarbeitung personenbezogener Daten kann dabei auch in
         den USA erfolgen; diese stützt sich auf die EU-Standardvertragsklauseln (Art. 46 DSGVO).
       </p>
@@ -62,6 +60,13 @@ export default function DatenschutzPage() {
         Ihrer Anfrage bzw. Rückmeldung verarbeitet. Die Formulare übermitteln die eingegebenen Daten über eine
         verschlüsselte Verbindung (TLS) an den Server dieser Website, der sie als E-Mail an mich weiterleitet. Eine
         dauerhafte Speicherung der Daten auf dem Server erfolgt nicht.
+      </p>
+      <p>
+        Zum Schutz der Formulare vor missbräuchlicher Nutzung (Spam) verarbeitet der Server beim Absenden zudem
+        kurzzeitig Ihre IP-Adresse, um die Zahl der Einsendungen pro IP-Adresse zu begrenzen. Die IP-Adresse wird dabei
+        nicht mit dem Inhalt Ihrer Nachricht verknüpft, nur flüchtig im Arbeitsspeicher gehalten und nicht dauerhaft
+        gespeichert; nach etwa zehn Minuten wird sie nicht mehr berücksichtigt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f
+        DSGVO (berechtigtes Interesse an der Missbrauchsabwehr und am stabilen Betrieb der Formulare).
       </p>
       <p>
         Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), Art. 6 Abs. 1 lit. b DSGVO (Durchführung
@@ -84,8 +89,8 @@ export default function DatenschutzPage() {
       </p>
       <p>
         Meine E-Mail-Adresse wird über den Dienst Gmail der Google Ireland Limited (Gordon House, Barrow Street, Dublin
-        4, Irland) betrieben. Bei einer Kontaktaufnahme per E-Mail werden die von Ihnen übermittelten Daten daher auch
-        durch Google verarbeitet. Nähere Informationen finden Sie in der Datenschutzerklärung von Google:{" "}
+        4, Irland) betrieben. Bei einer Kontaktaufnahme per E-Mail oder über die Formulare dieser Website werden die
+        von Ihnen übermittelten Daten daher auch durch Google verarbeitet. Nähere Informationen finden Sie in der Datenschutzerklärung von Google:{" "}
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
           policies.google.com/privacy
         </a>
