@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -10,6 +11,7 @@ import WaterSurface from "@/components/WaterSurface";
 import Marquee from "@/components/Marquee";
 import WaterCard from "@/components/WaterCard";
 import ImageCarousel from "@/components/ImageCarousel";
+import { LIMITS, type ContactPayload } from "@/lib/contact";
 
 /* Angebote data is inline in the bento grid below */
 
@@ -52,7 +54,32 @@ const stats = [
   { value: "♡", label: "Mit Herz" },
 ];
 
+type FormStatus = "idle" | "sending" | "success" | "error";
+
+async function submitForm(
+  payload: ContactPayload,
+  setStatus: (status: FormStatus) => void,
+  form: HTMLFormElement
+) {
+  setStatus("sending");
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    form.reset();
+    setStatus("success");
+  } catch {
+    setStatus("error");
+  }
+}
+
 export default function Home() {
+  const [contactStatus, setContactStatus] = useState<FormStatus>("idle");
+  const [feedbackStatus, setFeedbackStatus] = useState<FormStatus>("idle");
+
   return (
     <main className="relative overflow-hidden">
       <Bubbles count={10} />
@@ -551,6 +578,99 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== ERFAHRUNGEN / FEEDBACK ===== */}
+      <WaveDivider colorFrom="#0c1a35" colorTo="#172e59" />
+      <section id="erfahrungen" className="relative bg-water-900 py-24 md:py-36 noise-overlay">
+        <div className="absolute inset-0 water-caustics opacity-15" />
+        <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
+          <AnimatedSection>
+            <p className="section-subtitle text-water-400 mb-4 text-center">Ihre Rückmeldung</p>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
+              Erfahrung mit <span className="gradient-text">Szeder Coaching</span>
+            </h2>
+            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
+              Sie waren bereits bei mir im Wasser? Ich freue mich sehr über Ihre Rückmeldung —
+              teilen Sie Ihre Erfahrung mit mir.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                submitForm(
+                  {
+                    type: "erfahrung",
+                    name: (form.elements.namedItem("feedback-name") as HTMLInputElement).value,
+                    feedback: (form.elements.namedItem("feedback-text") as HTMLTextAreaElement).value,
+                    company: (form.elements.namedItem("company") as HTMLInputElement).value,
+                  },
+                  setFeedbackStatus,
+                  form
+                );
+              }}
+              className="glass-card rounded-2xl p-8 md:p-10 hover:transform-none"
+            >
+              <div className="space-y-5">
+                <div>
+                  <label htmlFor="feedback-name" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Name</label>
+                  <input
+                    type="text" id="feedback-name" name="feedback-name" required maxLength={LIMITS.name}
+                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                    placeholder="Ihr Name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="feedback-text" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Ihre Erfahrung</label>
+                  <textarea
+                    id="feedback-text" name="feedback-text" required rows={6} maxLength={LIMITS.message}
+                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all resize-none text-sm"
+                    placeholder="Erzählen Sie von Ihrer Erfahrung mit Szeder Coaching..."
+                  />
+                </div>
+                {/* Honeypot: offscreen statt sr-only (Screenreader sollen es nicht vorlesen), nicht disabled (Bots überspringen disabled-Felder) */}
+                <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden">
+                  <label htmlFor="feedback-company">Firma</label>
+                  <input type="text" id="feedback-company" name="company" tabIndex={-1} autoComplete="off" />
+                </div>
+                <div className="flex items-start gap-3 pt-1">
+                  <input
+                    type="checkbox" id="feedback-privacy" name="feedback-privacy" required
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 accent-water-500"
+                  />
+                  <label htmlFor="feedback-privacy" className="text-cream/40 text-xs leading-relaxed">
+                    Ich habe die{" "}
+                    <a href="/datenschutz" className="text-water-300 underline hover:text-water-200 transition-colors">
+                      Datenschutzerklärung
+                    </a>{" "}
+                    gelesen und stimme der Verarbeitung meiner Daten zu.
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  disabled={feedbackStatus === "sending"}
+                  className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-water-500/20 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {feedbackStatus === "sending" ? "Wird gesendet…" : "Erfahrung senden"}
+                </button>
+                {feedbackStatus === "success" && (
+                  <p role="status" className="mt-4 rounded-xl border border-water-500/20 bg-water-500/10 p-4 text-sm text-water-300">
+                    Vielen Dank für Ihre Rückmeldung!
+                  </p>
+                )}
+                {feedbackStatus === "error" && (
+                  <p role="status" className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+                    Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an eszterbary@szedercoaching.at.
+                  </p>
+                )}
+              </div>
+            </form>
+          </AnimatedSection>
+        </div>
+      </section>
+      <WaveDivider colorFrom="#172e59" colorTo="#0c1a35" flip />
+
       {/* ===== KONTAKT ===== */}
       <section id="kontakt" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
@@ -630,10 +750,17 @@ export default function Home() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   const form = e.target as HTMLFormElement;
-                  const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-                  const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-                  const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-                  window.location.href = `mailto:eszterbary@szedercoaching.at?subject=Anfrage von ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`)}`;
+                  submitForm(
+                    {
+                      type: "kontakt",
+                      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+                      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+                      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+                      company: (form.elements.namedItem("company") as HTMLInputElement).value,
+                    },
+                    setContactStatus,
+                    form
+                  );
                 }}
                 className="glass-card rounded-2xl p-8 md:p-10 hover:transform-none"
               >
@@ -645,7 +772,7 @@ export default function Home() {
                   <div>
                     <label htmlFor="name" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Name</label>
                     <input
-                      type="text" id="name" name="name" required
+                      type="text" id="name" name="name" required maxLength={LIMITS.name}
                       className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
                       placeholder="Ihr Name"
                     />
@@ -653,7 +780,7 @@ export default function Home() {
                   <div>
                     <label htmlFor="email" className="block text-water-400 text-xs tracking-wider uppercase mb-2">E-Mail</label>
                     <input
-                      type="email" id="email" name="email" required
+                      type="email" id="email" name="email" required maxLength={LIMITS.email}
                       className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
                       placeholder="Ihre E-Mail-Adresse"
                     />
@@ -661,10 +788,15 @@ export default function Home() {
                   <div>
                     <label htmlFor="message" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Nachricht</label>
                     <textarea
-                      id="message" name="message" required rows={5}
+                      id="message" name="message" required rows={5} maxLength={LIMITS.message}
                       className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all resize-none text-sm"
                       placeholder="Ihre Nachricht..."
                     />
+                  </div>
+                  {/* Honeypot: offscreen statt sr-only (Screenreader sollen es nicht vorlesen), nicht disabled (Bots überspringen disabled-Felder) */}
+                  <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden">
+                    <label htmlFor="contact-company">Firma</label>
+                    <input type="text" id="contact-company" name="company" tabIndex={-1} autoComplete="off" />
                   </div>
                   <div className="flex items-start gap-3 pt-1">
                     <input
@@ -681,10 +813,21 @@ export default function Home() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-water-500/20 mt-2"
+                    disabled={contactStatus === "sending"}
+                    className="w-full py-4 bg-water-500 hover:bg-water-400 text-white rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-water-500/20 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Nachricht senden
+                    {contactStatus === "sending" ? "Wird gesendet…" : "Nachricht senden"}
                   </button>
+                  {contactStatus === "success" && (
+                    <p role="status" className="mt-4 rounded-xl border border-water-500/20 bg-water-500/10 p-4 text-sm text-water-300">
+                      Vielen Dank! Ihre Nachricht wurde gesendet. Ich melde mich in Kürze bei Ihnen.
+                    </p>
+                  )}
+                  {contactStatus === "error" && (
+                    <p role="status" className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+                      Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an eszterbary@szedercoaching.at.
+                    </p>
+                  )}
                 </div>
               </form>
             </AnimatedSection>
@@ -718,6 +861,7 @@ export default function Home() {
                 { href: "#über-mich", label: "Über mich" },
                 { href: "#angebote", label: "Angebote" },
                 { href: "#galerie", label: "Galerie" },
+                { href: "#erfahrungen", label: "Erfahrungen" },
                 { href: "#kontakt", label: "Kontakt" },
               ].map((link) => (
                 <a key={link.href} href={link.href} className="hover:text-cream/60 transition-colors">

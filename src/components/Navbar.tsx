@@ -10,6 +10,7 @@ const navLinks = [
   { href: "#über-mich", label: "Über mich" },
   { href: "#angebote", label: "Angebote" },
   { href: "#galerie", label: "Galerie" },
+  { href: "#erfahrungen", label: "Erfahrungen" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 

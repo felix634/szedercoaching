@@ -15,7 +15,7 @@ export default function DatenschutzPage() {
     <LegalPage
       title="Datenschutzerklärung"
       intro="Der Schutz Ihrer personenbezogenen Daten ist mir ein wichtiges Anliegen. Nachfolgend informiere ich Sie über die Verarbeitung Ihrer Daten im Rahmen dieser Website."
-      lastUpdated="Juni 2026"
+      lastUpdated="Juli 2026"
     >
       <h2>1. Verantwortliche</h2>
       <p>Verantwortliche für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO):</p>
@@ -55,20 +55,33 @@ export default function DatenschutzPage() {
         den USA erfolgen; diese stützt sich auf die EU-Standardvertragsklauseln (Art. 46 DSGVO).
       </p>
 
-      <h2>4. Kontaktaufnahme über das Kontaktformular</h2>
+      <h2>4. Kontaktaufnahme über das Kontakt- oder Feedback-Formular</h2>
       <p>
-        Wenn Sie über das Kontaktformular oder per E-Mail mit mir in Kontakt treten, werden Ihre Angaben (Name,
-        E-Mail-Adresse und Nachricht) zum Zweck der Bearbeitung Ihrer Anfrage verarbeitet. Das Kontaktformular speichert
-        keine Daten auf dem Server dieser Website, sondern öffnet Ihr eigenes E-Mail-Programm und versendet die Nachricht
-        an meine E-Mail-Adresse.
+        Wenn Sie über das Kontaktformular, das Feedback-Formular („Erfahrung mit Szeder Coaching“) oder per E-Mail mit
+        mir in Kontakt treten, werden Ihre Angaben (Name, ggf. E-Mail-Adresse und Nachricht) zum Zweck der Bearbeitung
+        Ihrer Anfrage bzw. Rückmeldung verarbeitet. Die Formulare übermitteln die eingegebenen Daten über eine
+        verschlüsselte Verbindung (TLS) an den Server dieser Website, der sie als E-Mail an mich weiterleitet. Eine
+        dauerhafte Speicherung der Daten auf dem Server erfolgt nicht.
       </p>
       <p>
-        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen) bzw. Art. 6 Abs. 1 lit.
-        f DSGVO (Beantwortung Ihrer Anfrage). Ihre Daten werden gelöscht, sobald die Anfrage abschließend bearbeitet ist
-        und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+        Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), Art. 6 Abs. 1 lit. b DSGVO (Durchführung
+        vorvertraglicher Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (Beantwortung Ihrer Anfrage). Ihre Daten werden
+        gelöscht, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten
+        entgegenstehen.
       </p>
 
-      <h2>5. E-Mail-Versand (Gmail / Google)</h2>
+      <h2>5. E-Mail-Versand (Resend / Gmail)</h2>
+      <p>
+        Für den Versand der über die Formulare übermittelten Nachrichten nutze ich den Dienst Resend (Resend, Inc.,
+        2261 Market Street #5039, San Francisco, CA 94114, USA) als Auftragsverarbeiter gemäß Art. 28 DSGVO. Eine
+        Verarbeitung personenbezogener Daten kann dabei auch in den USA erfolgen; diese stützt sich auf die
+        EU-Standardvertragsklauseln (Art. 46 DSGVO). Nähere Informationen finden Sie in der Datenschutzerklärung von
+        Resend:{" "}
+        <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+          resend.com/legal/privacy-policy
+        </a>
+        .
+      </p>
       <p>
         Meine E-Mail-Adresse wird über den Dienst Gmail der Google Ireland Limited (Gordon House, Barrow Street, Dublin
         4, Irland) betrieben. Bei einer Kontaktaufnahme per E-Mail werden die von Ihnen übermittelten Daten daher auch
@@ -131,7 +144,7 @@ export default function DatenschutzPage() {
 
       <h2>12. Aktualität dieser Datenschutzerklärung</h2>
       <p>
-        Diese Datenschutzerklärung hat den Stand Juni 2026. Durch die Weiterentwicklung der Website oder aufgrund
+        Diese Datenschutzerklärung hat den Stand Juli 2026. Durch die Weiterentwicklung der Website oder aufgrund
         geänderter gesetzlicher Vorgaben kann es notwendig werden, sie anzupassen.
       </p>
     </LegalPage>
