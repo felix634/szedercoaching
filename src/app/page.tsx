@@ -47,6 +47,18 @@ const galleryGroups = [
   },
 ];
 
+const testimonials = [
+  {
+    paragraphs: [
+      "Liebe Eszter, vielen Dank für diese wunderbare Entwicklung, die Anna während der Schwimmstunden dank deines Wissens und deiner Unterstützung gemacht hat!",
+      "Anna kann mit Misserfolgen nur schwer umgehen – das konntest du ja selbst erleben. Trotzdem hat sie sich immer auf die Freitage gefreut und deine Stunden sehr geliebt.",
+      "Noch einmal von Herzen: Danke für alles! Mit Annas Worten möchte ich mich verabschieden. Nach der heutigen letzten Stunde sagte sie auf dem Weg aus dem Schwimmbad:",
+    ],
+    highlight: "„Ich möchte später einmal bei den Olympischen Spielen schwimmen!“",
+    author: "Anna und Kitti",
+  },
+];
+
 const stats = [
   { value: "100%", label: "Individuell" },
   { value: "1:1", label: "Betreuung" },
@@ -584,11 +596,69 @@ export default function Home() {
         <div className="absolute inset-0 water-caustics opacity-15" />
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
           <AnimatedSection>
-            <p className="section-subtitle text-water-400 mb-4 text-center">Ihre Rückmeldung</p>
+            <p className="section-subtitle text-water-400 mb-4 text-center">Stimmen</p>
             <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
-              Erfahrung mit <span className="gradient-text">Szeder Coaching</span>
+              Erfahrungen mit <span className="gradient-text">Szeder Coaching</span>
             </h2>
             <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
+              Echte Rückmeldungen von Familien, die den Weg ins Wasser
+              gemeinsam mit mir gegangen sind.
+            </p>
+          </AnimatedSection>
+
+          {/* Testimonials */}
+          <div className="space-y-8 mb-20 md:mb-24">
+            {testimonials.map((t, i) => (
+              <AnimatedSection key={t.author} delay={0.1 + i * 0.1}>
+                <figure className="glass-card rounded-2xl p-8 md:p-12 hover:transform-none relative overflow-hidden">
+                  <svg
+                    className="absolute top-6 right-8 w-16 h-16 text-water-500/10"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+                  </svg>
+
+                  <div className="flex gap-1 mb-6" aria-label="5 von 5 Sternen">
+                    {[...Array(5)].map((_, s) => (
+                      <svg key={s} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557L3.041 10.385a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  <blockquote className="space-y-4 text-cream/60 text-base md:text-lg leading-relaxed">
+                    {t.paragraphs.map((p) => (
+                      <p key={p.slice(0, 24)}>{p}</p>
+                    ))}
+                    <p className="font-heading text-xl md:text-2xl italic text-water-300 pt-2">
+                      {t.highlight}
+                    </p>
+                  </blockquote>
+
+                  <figcaption className="mt-8 flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-full bg-water-500/15 border border-water-500/25 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-water-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-cream font-medium">{t.author}</p>
+                      <p className="text-water-400/60 text-sm">Schwimmschülerin & Mama</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Feedback form */}
+          <AnimatedSection>
+            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-center text-cream mb-4">
+              Teilen Sie Ihre <span className="gradient-text">Erfahrung</span>
+            </h3>
+            <p className="text-center text-cream/40 text-base mb-10 max-w-2xl mx-auto leading-relaxed">
               Sie waren bereits bei mir im Wasser? Ich freue mich sehr über Ihre Rückmeldung —
               teilen Sie Ihre Erfahrung mit mir.
             </p>
