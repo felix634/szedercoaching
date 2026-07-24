@@ -22,7 +22,10 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   );
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-2xl group/carousel">
+    <div
+      className="relative w-full h-full overflow-hidden rounded-2xl group/carousel"
+      aria-live="polite"
+    >
       <AnimatePresence initial={false} custom={dir} mode="popLayout">
         <motion.div
           key={current}
@@ -64,7 +67,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
             type="button"
             onClick={() => paginate(-1)}
             aria-label="Vorheriges Bild"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-water-950/50 backdrop-blur-md border border-water-400/20 flex items-center justify-center text-cream/80 hover:bg-water-500/60 hover:text-cream transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 focus:opacity-100"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-water-950/50 backdrop-blur-md border border-water-400/20 flex items-center justify-center text-cream/80 hover:bg-water-500/60 hover:text-cream transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -76,7 +79,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
             type="button"
             onClick={() => paginate(1)}
             aria-label="Nächstes Bild"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-water-950/50 backdrop-blur-md border border-water-400/20 flex items-center justify-center text-cream/80 hover:bg-water-500/60 hover:text-cream transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 focus:opacity-100"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-water-950/50 backdrop-blur-md border border-water-400/20 flex items-center justify-center text-cream/80 hover:bg-water-500/60 hover:text-cream transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -91,6 +94,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
                 type="button"
                 onClick={() => setState(([prev]) => [prev + (i - current), i - current])}
                 aria-label={`Bild ${i + 1}`}
+                aria-current={i === current ? "true" : undefined}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   i === current
                     ? "w-6 bg-water-300"

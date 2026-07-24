@@ -37,6 +37,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // Prefer AVIF (≈20–30 % smaller than WebP) and keep optimized variants
+    // cached for 31 days instead of the 60-second default.
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2678400,
+  },
   async headers() {
     return [
       {

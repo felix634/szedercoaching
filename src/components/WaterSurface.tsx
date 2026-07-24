@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function WaterSurface({ className = "" }: { className?: string }) {
+  const reduce = useReducedMotion();
   return (
     <div className={`absolute bottom-0 left-0 right-0 overflow-hidden ${className}`}>
       <svg
@@ -23,38 +24,53 @@ export default function WaterSurface({ className = "" }: { className?: string })
 
         <motion.path
           fill="url(#waterGrad2)"
-          animate={{
-            d: [
-              "M0,192 C213,150 427,210 640,192 C853,174 1067,210 1280,192 L1280,320 L0,320 Z",
-              "M0,210 C213,230 427,170 640,210 C853,230 1067,170 1280,210 L1280,320 L0,320 Z",
-              "M0,192 C213,150 427,210 640,192 C853,174 1067,210 1280,192 L1280,320 L0,320 Z",
-            ],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          d="M0,192 C213,150 427,210 640,192 C853,174 1067,210 1280,192 L1280,320 L0,320 Z"
+          animate={
+            reduce
+              ? undefined
+              : {
+                  d: [
+                    "M0,192 C213,150 427,210 640,192 C853,174 1067,210 1280,192 L1280,320 L0,320 Z",
+                    "M0,210 C213,230 427,170 640,210 C853,230 1067,170 1280,210 L1280,320 L0,320 Z",
+                    "M0,192 C213,150 427,210 640,192 C853,174 1067,210 1280,192 L1280,320 L0,320 Z",
+                  ],
+                }
+          }
+          transition={reduce ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <motion.path
           fill="url(#waterGrad1)"
-          animate={{
-            d: [
-              "M0,224 C320,200 480,256 640,224 C800,192 960,256 1280,224 L1280,320 L0,320 Z",
-              "M0,240 C320,260 480,210 640,240 C800,260 960,210 1280,240 L1280,320 L0,320 Z",
-              "M0,224 C320,200 480,256 640,224 C800,192 960,256 1280,224 L1280,320 L0,320 Z",
-            ],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          d="M0,224 C320,200 480,256 640,224 C800,192 960,256 1280,224 L1280,320 L0,320 Z"
+          animate={
+            reduce
+              ? undefined
+              : {
+                  d: [
+                    "M0,224 C320,200 480,256 640,224 C800,192 960,256 1280,224 L1280,320 L0,320 Z",
+                    "M0,240 C320,260 480,210 640,240 C800,260 960,210 1280,240 L1280,320 L0,320 Z",
+                    "M0,224 C320,200 480,256 640,224 C800,192 960,256 1280,224 L1280,320 L0,320 Z",
+                  ],
+                }
+          }
+          transition={reduce ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <motion.path
           fill="rgba(12,26,53,0.9)"
-          animate={{
-            d: [
-              "M0,256 C160,240 320,272 480,256 C640,240 800,272 960,256 C1120,240 1200,260 1280,256 L1280,320 L0,320 Z",
-              "M0,264 C160,280 320,248 480,264 C640,280 800,248 960,264 C1120,280 1200,256 1280,264 L1280,320 L0,320 Z",
-              "M0,256 C160,240 320,272 480,256 C640,240 800,272 960,256 C1120,240 1200,260 1280,256 L1280,320 L0,320 Z",
-            ],
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          d="M0,256 C160,240 320,272 480,256 C640,240 800,272 960,256 C1120,240 1200,260 1280,256 L1280,320 L0,320 Z"
+          animate={
+            reduce
+              ? undefined
+              : {
+                  d: [
+                    "M0,256 C160,240 320,272 480,256 C640,240 800,272 960,256 C1120,240 1200,260 1280,256 L1280,320 L0,320 Z",
+                    "M0,264 C160,280 320,248 480,264 C640,280 800,248 960,264 C1120,280 1200,256 1280,264 L1280,320 L0,320 Z",
+                    "M0,256 C160,240 320,272 480,256 C640,240 800,272 960,256 C1120,240 1200,260 1280,256 L1280,320 L0,320 Z",
+                  ],
+                }
+          }
+          transition={reduce ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
       </svg>
     </div>

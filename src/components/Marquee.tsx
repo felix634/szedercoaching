@@ -21,7 +21,10 @@ export default function Marquee() {
   );
 
   return (
-    <div className="relative overflow-hidden py-6 bg-water-900/50 border-y border-water-800/30">
+    <div
+      aria-hidden="true"
+      className="relative overflow-hidden py-6 bg-water-900/50 border-y border-water-800/30"
+    >
       <div className="animate-marquee flex whitespace-nowrap items-center">
         {[...Array(2)].map((_, setIdx) => (
           <div key={setIdx} className="flex items-center">

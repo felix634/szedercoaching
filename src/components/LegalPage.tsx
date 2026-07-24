@@ -64,19 +64,34 @@ export default function LegalPage({
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-water-800/30">
-        <div className="max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-cream/30 text-xs">© {year} Szeder Coaching</p>
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-cream/50">
-            <Link href="/" className="hover:text-cream transition-colors">
-              Startseite
-            </Link>
-            <Link href="/impressum" className="hover:text-cream transition-colors">
-              Impressum
-            </Link>
-            <Link href="/datenschutz" className="hover:text-cream transition-colors">
-              Datenschutz
-            </Link>
-          </nav>
+        <div className="max-w-3xl mx-auto px-6 py-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-cream/30 text-xs">© {year} Szeder Coaching</p>
+            <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-cream/50">
+              <Link href="/" className="hover:text-cream transition-colors">
+                Startseite
+              </Link>
+              <Link href="/impressum" className="hover:text-cream transition-colors">
+                Impressum
+              </Link>
+              <Link href="/datenschutz" className="hover:text-cream transition-colors">
+                Datenschutz
+              </Link>
+            </nav>
+          </div>
+
+          {/* Agency credit */}
+          <p className="mt-6 text-center text-xs text-cream/30">
+            made by{" "}
+            <a
+              href="https://prometheusdigital.hu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-cream transition-colors"
+            >
+              Prometheus Digital Kft.
+            </a>
+          </p>
         </div>
       </footer>
     </main>

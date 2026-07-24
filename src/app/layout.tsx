@@ -67,7 +67,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/images/favicon.svg", type: "image/svg+xml" },
       { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
@@ -160,6 +159,12 @@ export default function RootLayout({
   return (
     <html lang="de-AT" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="antialiased bg-water-950 text-cream overflow-x-hidden">
+        <a
+          href="#start"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-water-500 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+        >
+          Zum Inhalt springen
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

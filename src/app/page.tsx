@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Bubbles from "@/components/Bubbles";
 import WaveDivider from "@/components/WaveDivider";
@@ -91,6 +91,7 @@ async function submitForm(
 export default function Home() {
   const [contactStatus, setContactStatus] = useState<FormStatus>("idle");
   const [feedbackStatus, setFeedbackStatus] = useState<FormStatus>("idle");
+  const reduce = useReducedMotion();
 
   return (
     <main className="relative overflow-hidden">
@@ -127,6 +128,8 @@ export default function Home() {
               alt="Szeder Coaching Logo"
               width={140}
               height={140}
+              sizes="(max-width: 768px) 96px, 144px"
+              priority
               className="mx-auto mb-10 rounded-full w-24 h-24 md:w-36 md:h-36 shadow-2xl shadow-water-500/20"
             />
           </motion.div>
@@ -172,8 +175,8 @@ export default function Home() {
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">Scrollen</span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            animate={reduce ? undefined : { y: [0, 8, 0] }}
+            transition={reduce ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             <svg className="w-5 h-5 text-cream/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -205,6 +208,7 @@ export default function Home() {
                     alt="Szeder – die gerettete Labrador-Hündin, die ihre Angst vor dem Wasser überwand"
                     width={600}
                     height={600}
+                    sizes="(max-width: 768px) 100vw, 45vw"
                     className="w-full object-cover aspect-square transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
@@ -273,6 +277,7 @@ export default function Home() {
                     alt="Eszter Bary – Schwimmcoach"
                     width={500}
                     height={650}
+                    sizes="(max-width: 768px) 100vw, 40vw"
                     className="w-full object-cover aspect-[3/4] transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-water-950/80 via-transparent to-transparent" />
@@ -421,6 +426,7 @@ export default function Home() {
                   src="/images/pool.jpg"
                   alt="Wassergewöhnung im Pool – behutsamer Einstieg ins Schwimmen"
                   fill
+                  sizes="(max-width: 768px) 100vw, 42vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-water-950 via-water-950/50 to-transparent" />
@@ -506,6 +512,7 @@ export default function Home() {
                   src="/images/swimming.jpg"
                   alt="Freude am Schwimmen – Freiheit und Sicherheit im Wasser"
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-water-950 via-water-950/60 to-water-950/20" />
@@ -620,7 +627,7 @@ export default function Home() {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
                   </svg>
 
-                  <div className="flex gap-1 mb-6" aria-label="5 von 5 Sternen">
+                  <div className="flex gap-1 mb-6" role="img" aria-label="Bewertung: 5 von 5 Sternen">
                     {[...Array(5)].map((_, s) => (
                       <svg key={s} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557L3.041 10.385a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
@@ -687,7 +694,7 @@ export default function Home() {
                   <label htmlFor="feedback-name" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Name</label>
                   <input
                     type="text" id="feedback-name" name="feedback-name" required maxLength={LIMITS.name}
-                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 focus-visible:ring-2 focus-visible:ring-water-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-water-950 transition-all text-sm"
                     placeholder="Ihr Name"
                   />
                 </div>
@@ -695,7 +702,7 @@ export default function Home() {
                   <label htmlFor="feedback-text" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Ihre Erfahrung</label>
                   <textarea
                     id="feedback-text" name="feedback-text" required rows={6} maxLength={LIMITS.message}
-                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all resize-none text-sm"
+                    className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 focus-visible:ring-2 focus-visible:ring-water-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-water-950 transition-all resize-none text-sm"
                     placeholder="Erzählen Sie von Ihrer Erfahrung mit Szeder Coaching..."
                   />
                 </div>
@@ -709,7 +716,7 @@ export default function Home() {
                     type="checkbox" id="feedback-privacy" name="feedback-privacy" required
                     className="mt-0.5 h-4 w-4 flex-shrink-0 accent-water-500"
                   />
-                  <label htmlFor="feedback-privacy" className="text-cream/40 text-xs leading-relaxed">
+                  <label htmlFor="feedback-privacy" className="text-cream/60 text-xs leading-relaxed">
                     Ich habe die{" "}
                     <a href="/datenschutz" className="text-water-300 underline hover:text-water-200 transition-colors">
                       Datenschutzerklärung
@@ -843,7 +850,7 @@ export default function Home() {
                     <label htmlFor="name" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Name</label>
                     <input
                       type="text" id="name" name="name" required maxLength={LIMITS.name}
-                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 focus-visible:ring-2 focus-visible:ring-water-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-water-950 transition-all text-sm"
                       placeholder="Ihr Name"
                     />
                   </div>
@@ -851,7 +858,7 @@ export default function Home() {
                     <label htmlFor="email" className="block text-water-400 text-xs tracking-wider uppercase mb-2">E-Mail</label>
                     <input
                       type="email" id="email" name="email" required maxLength={LIMITS.email}
-                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all text-sm"
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 focus-visible:ring-2 focus-visible:ring-water-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-water-950 transition-all text-sm"
                       placeholder="Ihre E-Mail-Adresse"
                     />
                   </div>
@@ -859,7 +866,7 @@ export default function Home() {
                     <label htmlFor="message" className="block text-water-400 text-xs tracking-wider uppercase mb-2">Nachricht</label>
                     <textarea
                       id="message" name="message" required rows={5} maxLength={LIMITS.message}
-                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 transition-all resize-none text-sm"
+                      className="w-full bg-water-950/50 border border-water-800/40 rounded-xl px-5 py-3.5 text-cream placeholder-cream/20 focus:outline-none focus:border-water-500/50 focus:bg-water-950/70 focus-visible:ring-2 focus-visible:ring-water-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-water-950 transition-all resize-none text-sm"
                       placeholder="Ihre Nachricht..."
                     />
                   </div>
@@ -873,7 +880,7 @@ export default function Home() {
                       type="checkbox" id="privacy" name="privacy" required
                       className="mt-0.5 h-4 w-4 flex-shrink-0 accent-water-500"
                     />
-                    <label htmlFor="privacy" className="text-cream/40 text-xs leading-relaxed">
+                    <label htmlFor="privacy" className="text-cream/60 text-xs leading-relaxed">
                       Ich habe die{" "}
                       <a href="/datenschutz" className="text-water-300 underline hover:text-water-200 transition-colors">
                         Datenschutzerklärung
@@ -924,7 +931,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-8 text-sm text-cream/30">
+            <div className="flex flex-wrap gap-8 text-sm text-cream/50">
               {[
                 { href: "#start", label: "Start" },
                 { href: "#geschichte", label: "Geschichte" },
@@ -940,13 +947,13 @@ export default function Home() {
               ))}
             </div>
 
-            <p className="text-cream/20 text-xs">
+            <p className="text-cream/50 text-xs">
               &copy; {new Date().getFullYear()} Szeder Coaching
             </p>
           </div>
 
           {/* Legal links */}
-          <div className="mt-8 pt-6 border-t border-water-800/20 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-cream/30">
+          <div className="mt-8 pt-6 border-t border-water-800/20 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-cream/50">
             <a href="/impressum" className="hover:text-cream/60 transition-colors">
               Impressum
             </a>
@@ -954,6 +961,19 @@ export default function Home() {
               Datenschutz
             </a>
           </div>
+
+          {/* Agency credit */}
+          <p className="mt-6 text-center text-xs text-cream/30">
+            made by{" "}
+            <a
+              href="https://prometheusdigital.hu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-cream/60 transition-colors"
+            >
+              Prometheus Digital Kft.
+            </a>
+          </p>
         </div>
       </footer>
     </main>

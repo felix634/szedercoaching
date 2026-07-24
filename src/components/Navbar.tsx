@@ -24,6 +24,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close the mobile menu on Escape (keyboard accessibility).
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [menuOpen]);
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -64,7 +74,7 @@ export default function Navbar() {
                 className="text-cream/70 hover:text-cream transition-colors duration-300 text-sm tracking-wide font-medium relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-water-400 to-water-500 transition-all duration-300 group-hover:w-full rounded-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-water-400 to-water-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full rounded-full" />
               </a>
             ))}
           </div>
@@ -73,7 +83,9 @@ export default function Navbar() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden flex flex-col gap-[5px] p-2 relative z-50"
-            aria-label="Menü"
+            aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -98,6 +110,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

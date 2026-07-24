@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface AnimatedSectionProps {
@@ -16,11 +16,16 @@ export default function AnimatedSection({
   delay = 0,
   direction = "up",
 }: AnimatedSectionProps) {
-  const initial = {
-    opacity: 0,
-    y: direction === "up" ? 50 : 0,
-    x: direction === "left" ? -50 : direction === "right" ? 50 : 0,
-  };
+  const reduce = useReducedMotion();
+
+  // Respect prefers-reduced-motion: keep a gentle fade, drop the translation.
+  const initial = reduce
+    ? { opacity: 0 }
+    : {
+        opacity: 0,
+        y: direction === "up" ? 50 : 0,
+        x: direction === "left" ? -50 : direction === "right" ? 50 : 0,
+      };
 
   return (
     <motion.div
@@ -28,8 +33,8 @@ export default function AnimatedSection({
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{
-        duration: 0.8,
-        delay,
+        duration: reduce ? 0.3 : 0.8,
+        delay: reduce ? 0 : delay,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
       className={className}
