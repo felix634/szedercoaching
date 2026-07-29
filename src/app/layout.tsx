@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/og-image2.jpg",
         width: 1200,
         height: 630,
         alt: "Szeder Coaching – Schwimmcoaching mit Herz",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/og-image.jpg"],
+    images: ["/images/og-image2.jpg"],
   },
   icons: {
     icon: [
@@ -93,7 +93,7 @@ const jsonLd = {
   slogan: "Vertrauen lernen. Freiheit erleben.",
   url: SITE_URL,
   image: [
-    `${SITE_URL}/images/og-image.jpg`,
+    `${SITE_URL}/images/og-image2.jpg`,
     `${SITE_URL}/images/hero.jpg`,
     `${SITE_URL}/images/pool.jpg`,
   ],
