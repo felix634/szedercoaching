@@ -126,11 +126,11 @@ export default function Home() {
             <Image
               src="/images/logo.png"
               alt="Szeder Coaching Logo"
-              width={140}
-              height={140}
-              sizes="(max-width: 768px) 96px, 144px"
+              width={224}
+              height={224}
+              sizes="(max-width: 768px) 128px, 224px"
               priority
-              className="mx-auto mb-10 rounded-full w-24 h-24 md:w-36 md:h-36 shadow-2xl shadow-water-500/20"
+              className="mx-auto mb-10 rounded-full w-32 h-32 md:w-56 md:h-56 shadow-2xl shadow-water-500/20"
             />
           </motion.div>
 
