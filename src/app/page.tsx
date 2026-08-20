@@ -45,6 +45,19 @@ const galleryGroups = [
     title: "Mit Herz begleitet",
     images: ["/images/kind6/1.jpg", "/images/kind6/2.jpg"],
   },
+  {
+    title: "Über sich hinauswachsen",
+    images: [
+      "/images/kind7/1.jpg",
+      "/images/kind7/2.jpg",
+      "/images/kind7/3.jpg",
+      "/images/kind7/4.jpg",
+      "/images/kind7/5.jpg",
+      "/images/kind7/6.jpg",
+      "/images/kind7/7.jpg",
+      "/images/kind7/8.jpg",
+    ],
+  },
 ];
 
 const testimonials = [
