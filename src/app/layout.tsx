@@ -94,7 +94,7 @@ const jsonLd = {
   url: SITE_URL,
   image: [
     `${SITE_URL}/images/og-image2.jpg`,
-    `${SITE_URL}/images/hero.jpg`,
+    `${SITE_URL}/images/hero-20260830.jpg`,
     `${SITE_URL}/images/pool.jpg`,
   ],
   logo: `${SITE_URL}/images/logo.png`,

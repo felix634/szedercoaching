@@ -39,11 +39,29 @@ const galleryGroups = [
   },
   {
     title: "Sicher schwimmen",
-    images: ["/images/kind5/1.png", "/images/kind5/2.png", "/images/kind5/3.jpg"],
+    images: [
+      "/images/kind5/1.png",
+      "/images/kind5/2.png",
+      "/images/kind5/3.jpg",
+      "/images/alex/1.jpg",
+      "/images/alex/2.jpg",
+      "/images/alex/3.jpg",
+      "/images/alex/4.jpg",
+    ],
   },
   {
     title: "Mit Herz begleitet",
-    images: ["/images/kind6/1.jpg", "/images/kind6/2.jpg"],
+    images: [
+      "/images/kind6/1.jpg",
+      "/images/kind6/2.jpg",
+      "/images/simon-anna/1.jpg",
+      "/images/simon-anna/2.jpg",
+      "/images/simon-anna/3.jpg",
+      "/images/simon-anna/4.jpg",
+      "/images/simon-anna/5.jpg",
+      "/images/simon-anna/6.jpg",
+      "/images/simon-anna/7.jpg",
+    ],
   },
   {
     title: "Über sich hinauswachsen",
@@ -69,6 +87,28 @@ const testimonials = [
     ],
     highlight: "„Ich möchte später einmal bei den Olympischen Spielen schwimmen!“",
     author: "Anna und Kitti",
+    role: "Schwimmschülerin & Mama",
+  },
+  {
+    paragraphs: [
+      "Wir sind noch immer sehr begeistert und dankbar, dass es dieses Angebot gibt. Ich habe lange einen passenden Schwimmkurs für meinen Sohn mit Behinderung gesucht und haben letztendlich Eszter gefunden! Mein Sohn liebt sie und die Schwimmeinheit ist das Highlight seiner Woche.",
+      "Vielen Dank Eszter, durch deine ruhige und liebevolle Art konntest du schnell Vertrauen aufbauen. Du erkennst die Bedürfnisse der Kinder und bist so flexibel, dass dein Coaching immer abwechslungsreich und lustig, aber trotzdem klar und strukturiert ist. Levi profitiert sehr davon und hat schon sehr viele Fortschritte gemacht.",
+      "Ich empfehle das Szeder Coaching auf jeden Fall weiter, da es viel mehr als schwimmen ist! Mein Kind gewinnt an Selbstvertrauen, Sicherheit, Konzentration und Motivation und der Stolz in seinen Augen ist unbezahlbar. ❤",
+    ],
+    highlight: "„Wir freuen uns auf viele weitere Einheiten mit dir!“",
+    author: "Levi und Nicole",
+    role: "Schwimmschüler & Mama",
+  },
+  {
+    paragraphs: [
+      "Unser Sohn hat große Unsicherheit im Wasser und insbesondere Angst davor, den Kopf unterzutauchen.",
+      "Eszter hat ihn von Anfang an unglaublich herzlich und einfühlsam begleitet und schon beim Betreten des Bades dafür gesorgt, dass er sich wohlfühlt. Sie geht auf ihn und sein Tempo ein – ohne Druck, mit viel Geduld und positiver Motivation.",
+      "Heute geht er richtig gerne zum Schwimmen und freut sich auf jede Stunde. Es ist eine große Erleichterung zu sehen, wie er von Mal zu Mal sicherer und unbeschwerter im Wasser wird.",
+    ],
+    highlight:
+      "„Eszters einfühlsame Art und ihr Gespür für Kinder machen für uns den ganz besonderen Unterschied – und auch unsere jüngere Tochter geht inzwischen schwimmen bei ihr.“ 😊",
+    author: "Simon und Christina",
+    role: "Schwimmschüler & Mama",
   },
 ];
 
@@ -118,7 +158,7 @@ export default function Home() {
       >
         <div className="absolute inset-0">
           <Image
-            src="/images/hero.jpg"
+            src="/images/hero-20260830.jpg"
             alt="Ruhige Wasseroberfläche – Schwimmcoaching mit Herz bei Szeder Coaching"
             fill
             className="object-cover"
@@ -665,7 +705,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-cream font-medium">{t.author}</p>
-                      <p className="text-water-400/60 text-sm">Schwimmschülerin & Mama</p>
+                      <p className="text-water-400/60 text-sm">{t.role}</p>
                     </div>
                   </figcaption>
                 </figure>
