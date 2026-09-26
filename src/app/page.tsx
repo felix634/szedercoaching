@@ -11,6 +11,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ParallaxImage from "@/components/ParallaxImage";
 import ParallaxQuote from "@/components/ParallaxQuote";
 import Marquee from "@/components/Marquee";
+import WaterIntro from "@/components/WaterIntro";
 import WaterCard from "@/components/WaterCard";
 import ImageCarousel from "@/components/ImageCarousel";
 import { LIMITS, type ContactPayload } from "@/lib/contact";
@@ -167,6 +168,7 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden">
+      <WaterIntro />
       <Bubbles count={10} />
       <Navbar />
 

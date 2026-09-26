@@ -1,17 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
   transform,
-  useMotionTemplate,
   useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
-import WaterRipple from "@/components/WaterRipple";
 import WaterSurface from "@/components/WaterSurface";
+import { introDelay } from "@/lib/intro";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -23,26 +22,26 @@ const toFaded = transform([0, 0.55], [1, 0]);
 
 const lineReveal = {
   hidden: { y: "110%" },
-  show: (i: number) => ({
+  show: ([i, offset]: [number, number]) => ({
     y: "0%",
-    transition: { duration: 1.2, delay: 0.45 + i * 0.14, ease: EASE_OUT },
+    transition: { duration: 1.2, delay: offset + 0.45 + i * 0.14, ease: EASE_OUT },
   }),
 };
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  // Entrance waits for the water intro when it is playing (read once on mount).
+  const [offset] = useState(introDelay);
 
-  // Scrolling out of the hero feels like sinking below the surface: the photo
-  // drifts and zooms, the headline sinks, blurs and fades into the deep.
+  // Scrolling out of the hero: the photo drifts and zooms gently while the
+  // headline sinks and fades into the deep.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.18]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const deep = useTransform(scrollYProgress, toDeep);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 220]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 160]);
   const contentOpacity = useTransform(scrollYProgress, toFaded);
-  const blur = useTransform(scrollYProgress, [0, 0.55], [0, 10]);
-  const contentFilter = useMotionTemplate`blur(${blur}px)`;
 
   return (
     <section
@@ -54,9 +53,13 @@ export default function Hero() {
         className="absolute inset-0 will-change-transform"
         style={reduce ? undefined : { scale: bgScale, y: bgY }}
       >
-        <WaterRipple
+        <Image
           src="/images/hero-20260830.jpg"
           alt="Ruhige Wasseroberfläche – Schwimmcoaching mit Herz bei Szeder Coaching"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-water-950/70 via-water-950/35 to-water-950 pointer-events-none" />
@@ -70,12 +73,12 @@ export default function Hero() {
 
       <motion.div
         className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 pb-24"
-        style={reduce ? undefined : { y: contentY, opacity: contentOpacity, filter: contentFilter }}
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
       >
         <motion.div
           initial={reduce ? false : { opacity: 0, scale: 0.85, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: EASE_OUT }}
+          transition={{ duration: 1.4, delay: offset, ease: EASE_OUT }}
         >
           <Image
             src="/images/logo.png"
@@ -91,7 +94,7 @@ export default function Hero() {
         <motion.p
           initial={reduce ? false : { opacity: 0, letterSpacing: "0.5em" }}
           animate={{ opacity: 1, letterSpacing: "0.2em" }}
-          transition={{ duration: 1.4, delay: 0.3, ease: EASE_OUT }}
+          transition={{ duration: 1.4, delay: offset + 0.3, ease: EASE_OUT }}
           className="section-subtitle text-water-300 mb-6"
         >
           Schwimmcoaching mit Herz
@@ -101,7 +104,7 @@ export default function Hero() {
           <span className="block overflow-hidden pb-[0.08em] px-[0.08em]">
             <motion.span
               className="block text-cream"
-              custom={0}
+              custom={[0, offset]}
               variants={lineReveal}
               initial={reduce ? false : "hidden"}
               animate="show"
@@ -112,7 +115,7 @@ export default function Hero() {
           <span className="block overflow-hidden pb-[0.12em] px-[0.08em]">
             <motion.span
               className="block italic gradient-text"
-              custom={1}
+              custom={[1, offset]}
               variants={lineReveal}
               initial={reduce ? false : "hidden"}
               animate="show"
@@ -125,7 +128,7 @@ export default function Hero() {
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.9, ease: EASE_OUT }}
+          transition={{ duration: 1, delay: offset + 0.9, ease: EASE_OUT }}
           className="text-lg md:text-xl text-cream/75 max-w-2xl mx-auto leading-relaxed"
         >
           Ängste überwinden und die Freude am Schwimmen entdecken —
@@ -143,7 +146,7 @@ export default function Hero() {
           aria-label="Weiter nach unten scrollen"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 1 }}
+          transition={{ delay: offset + 1.8, duration: 1 }}
           className="flex flex-col items-center gap-3 group"
         >
           <span className="text-[10px] tracking-[0.3em] uppercase text-cream/40 group-hover:text-cream/70 transition-colors">

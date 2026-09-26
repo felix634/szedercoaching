@@ -7,10 +7,7 @@ import {
   useInView,
   useMotionValue,
   useReducedMotion,
-  useScroll,
-  useSpring,
   useTransform,
-  useVelocity,
 } from "framer-motion";
 
 const words = [
@@ -39,28 +36,18 @@ function Drop() {
   );
 }
 
-/** Endless word band that drifts on its own and speeds up (or reverses) with the scroll. */
-export default function Marquee({ baseVelocity = -2 }: { baseVelocity?: number }) {
+/** Endless word band drifting slowly and steadily. */
+export default function Marquee({ baseVelocity = -1.5 }: { baseVelocity?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
   const reduce = useReducedMotion();
 
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], { clamp: false });
   const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
-  const direction = useRef(1);
 
   useAnimationFrame((_, delta) => {
     if (reduce || !inView) return;
-    const factor = velocityFactor.get();
-    if (factor < 0) direction.current = -1;
-    else if (factor > 0) direction.current = 1;
-    let moveBy = direction.current * baseVelocity * (delta / 1000);
-    moveBy += direction.current * moveBy * factor;
-    baseX.set(baseX.get() + moveBy);
+    baseX.set(baseX.get() + baseVelocity * (delta / 1000));
   });
 
   return (

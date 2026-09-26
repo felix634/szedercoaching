@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
+import { INTRO_BOOT_SCRIPT } from "@/lib/intro";
 import "./globals.css";
 
 // Self-hosted via next/font (no requests to Google's servers → DSGVO-friendly).
@@ -158,8 +159,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de-AT" className={`${playfair.variable} ${dmSans.variable}`}>
+    // suppressHydrationWarning: the intro boot script may add a class to <html> before hydration.
+    <html lang="de-AT" className={`${playfair.variable} ${dmSans.variable}`} suppressHydrationWarning>
       <body className="antialiased bg-water-950 text-cream overflow-x-hidden">
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
         <a
           href="#start"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-water-500 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
