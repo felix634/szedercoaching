@@ -1,44 +1,92 @@
 "use client";
 
+import { useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
+
 const words = [
-  "SCHWIMMEN",
-  "VERTRAUEN",
-  "WASSER",
-  "FREIHEIT",
-  "MUT",
-  "COACHING",
-  "STÄRKE",
-  "FREUDE",
-  "SICHERHEIT",
-  "INKLUSION",
+  "Schwimmen",
+  "Vertrauen",
+  "Wasser",
+  "Freiheit",
+  "Mut",
+  "Coaching",
+  "Stärke",
+  "Freude",
+  "Sicherheit",
+  "Inklusion",
 ];
 
-export default function Marquee() {
-  const separator = (
-    <svg className="w-4 h-4 text-water-500 mx-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-      <circle cx="12" cy="12" r="4" />
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+};
+
+function Drop() {
+  return (
+    <svg className="w-4 h-4 md:w-5 md:h-5 text-water-500 mx-6 md:mx-10 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.5c-3.3 4.4-6.25 8.1-6.25 11.5a6.25 6.25 0 0012.5 0c0-3.4-2.95-7.1-6.25-11.5z" />
     </svg>
   );
+}
+
+/** Endless word band that drifts on its own and speeds up (or reverses) with the scroll. */
+export default function Marquee({ baseVelocity = -2 }: { baseVelocity?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref);
+  const reduce = useReducedMotion();
+
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], { clamp: false });
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+  const direction = useRef(1);
+
+  useAnimationFrame((_, delta) => {
+    if (reduce || !inView) return;
+    const factor = velocityFactor.get();
+    if (factor < 0) direction.current = -1;
+    else if (factor > 0) direction.current = 1;
+    let moveBy = direction.current * baseVelocity * (delta / 1000);
+    moveBy += direction.current * moveBy * factor;
+    baseX.set(baseX.get() + moveBy);
+  });
 
   return (
     <div
+      ref={ref}
       aria-hidden="true"
-      className="relative overflow-hidden py-6 bg-water-900/50 border-y border-water-800/30"
+      className="relative overflow-hidden py-8 md:py-12 bg-water-900/50 border-y border-water-800/30"
     >
-      <div className="animate-marquee flex whitespace-nowrap items-center">
-        {[...Array(2)].map((_, setIdx) => (
-          <div key={setIdx} className="flex items-center">
+      <motion.div className="flex w-max whitespace-nowrap items-center" style={{ x }}>
+        {[0, 1].map((set) => (
+          <div key={set} className="flex items-center">
             {words.map((word, i) => (
-              <span key={`${setIdx}-${i}`} className="flex items-center">
-                <span className="text-sm md:text-base font-heading font-medium tracking-[0.2em] text-cream/40">
+              <span key={`${set}-${i}`} className="flex items-center">
+                <span
+                  className={`font-heading text-4xl md:text-6xl lg:text-7xl tracking-tight ${
+                    i % 2 ? "italic text-outline" : "text-cream/85"
+                  }`}
+                >
                   {word}
                 </span>
-                {separator}
+                <Drop />
               </span>
             ))}
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

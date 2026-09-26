@@ -24,6 +24,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ===== SMOOTH SCROLL (Lenis) ===== */
+html.lenis {
+  scroll-behavior: auto;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 body {
   font-family: var(--font-body);
 }
@@ -101,6 +119,32 @@ body {
     radial-gradient(ellipse at 40% 80%, rgba(59, 143, 244, 0.10) 0%, transparent 50%);
   background-size: 200% 200%;
   animation: caustics 8s ease-in-out infinite;
+}
+
+/* ===== FLOATING LOGO (gentle buoy bob) ===== */
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-1.5deg); }
+}
+
+.animate-bob {
+  animation: bob 6s ease-in-out infinite;
+}
+
+/* ===== SCROLL CUE (drop running down a line) ===== */
+@keyframes scroll-drop {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+
+.animate-scroll-drop {
+  animation: scroll-drop 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* ===== OUTLINED DISPLAY TEXT ===== */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(147, 203, 252, 0.6);
 }
 
 /* ===== GLASSMORPHISM ===== */

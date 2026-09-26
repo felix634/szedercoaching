@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
+import { scrollToHash } from "@/lib/scroll";
 
 const navLinks = [
   { href: "#start", label: "Start" },
@@ -17,10 +18,13 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -106,6 +110,13 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Scroll progress, like a rising water level */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-px origin-left bg-gradient-to-r from-water-600 via-water-400 to-water-200"
+        style={{ scaleX: progress, opacity: scrolled ? 1 : 0 }}
+      />
+
       {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
@@ -125,9 +136,7 @@ export default function Navbar() {
                   onClick={(e) => {
                     e.preventDefault();
                     setMenuOpen(false);
-                    setTimeout(() => {
-                      window.location.hash = link.href;
-                    }, 400);
+                    scrollToHash(link.href);
                   }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

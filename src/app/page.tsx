@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Bubbles from "@/components/Bubbles";
 import WaveDivider from "@/components/WaveDivider";
 import AnimatedSection from "@/components/AnimatedSection";
-import WaterSurface from "@/components/WaterSurface";
+import Hero from "@/components/Hero";
+import SectionHeading from "@/components/SectionHeading";
+import ParallaxImage from "@/components/ParallaxImage";
+import ParallaxQuote from "@/components/ParallaxQuote";
 import Marquee from "@/components/Marquee";
 import WaterCard from "@/components/WaterCard";
 import ImageCarousel from "@/components/ImageCarousel";
@@ -162,7 +164,6 @@ async function submitForm(
 export default function Home() {
   const [contactStatus, setContactStatus] = useState<FormStatus>("idle");
   const [feedbackStatus, setFeedbackStatus] = useState<FormStatus>("idle");
-  const reduce = useReducedMotion();
 
   return (
     <main className="relative overflow-hidden">
@@ -170,91 +171,7 @@ export default function Home() {
       <Navbar />
 
       {/* ===== HERO ===== */}
-      <section
-        id="start"
-        className="relative min-h-screen flex items-center justify-center noise-overlay"
-      >
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-20260830.jpg"
-            alt="Ruhige Wasseroberfläche – Schwimmcoaching mit Herz bei Szeder Coaching"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-water-950/70 via-water-950/50 to-water-950" />
-          <div className="absolute inset-0 water-caustics opacity-40" />
-        </div>
-
-        <WaterSurface />
-
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20 pb-24">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <Image
-              src="/images/logo.png"
-              alt="Szeder Coaching Logo"
-              width={224}
-              height={224}
-              sizes="(max-width: 768px) 128px, 224px"
-              priority
-              className="mx-auto mb-10 rounded-full w-32 h-32 md:w-56 md:h-56 shadow-2xl shadow-water-500/20"
-            />
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="section-subtitle text-water-400 mb-6"
-          >
-            Schwimmcoaching mit Herz
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight"
-          >
-            <span className="text-cream">Vertrauen lernen.</span>
-            <br />
-            <span className="gradient-text">Freiheit erleben.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 leading-relaxed"
-          >
-            Ängste überwinden und die Freude am Schwimmen entdecken —
-            für Kinder und Erwachsene mit besonderen Bedürfnissen.
-          </motion.p>
-
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">Scrollen</span>
-          <motion.div
-            animate={reduce ? undefined : { y: [0, 8, 0] }}
-            transition={reduce ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <svg className="w-5 h-5 text-cream/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
-        </motion.div>
-      </section>
+      <Hero />
 
       {/* ===== MARQUEE ===== */}
       <Marquee />
@@ -262,30 +179,22 @@ export default function Home() {
       {/* ===== SZEDER STORY ===== */}
       <section id="geschichte" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-500 mb-4 text-center">Die Geschichte</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16 leading-tight">
-              Inspiriert von <span className="gradient-text italic">Szeder</span>
-            </h2>
-          </AnimatedSection>
+          <SectionHeading eyebrow="Die Geschichte">
+            Inspiriert von <span className="gradient-text italic">Szeder</span>
+          </SectionHeading>
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <AnimatedSection delay={0.1} direction="left">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative overflow-hidden rounded-2xl">
-                  <Image
-                    src="/images/szedi.jpg"
-                    alt="Szeder – die gerettete Labrador-Hündin, die ihre Angst vor dem Wasser überwand"
-                    width={600}
-                    height={600}
-                    sizes="(max-width: 768px) 100vw, 45vw"
-                    className="w-full object-cover aspect-square transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
-                </div>
-              </div>
-            </AnimatedSection>
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-br from-water-500/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <ParallaxImage
+                src="/images/szedi.jpg"
+                alt="Szeder – die gerettete Labrador-Hündin, die ihre Angst vor dem Wasser überwand"
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="aspect-square rounded-2xl"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-water-950/60 to-transparent" />
+              </ParallaxImage>
+            </div>
 
             <AnimatedSection delay={0.2} direction="right">
               <div className="space-y-6">
@@ -331,34 +240,26 @@ export default function Home() {
       {/* ===== ÜBER MICH ===== */}
       <section id="über-mich" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-500 mb-4 text-center">Schwimmcoach</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16">
-              Über <span className="gradient-text">mich</span>
-            </h2>
-          </AnimatedSection>
+          <SectionHeading eyebrow="Schwimmcoach">
+            Über <span className="gradient-text italic">mich</span>
+          </SectionHeading>
 
           <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
-            <AnimatedSection delay={0.1} direction="left" className="md:col-span-2">
-              <div className="relative group">
-                <div className="absolute -inset-3 bg-gradient-to-br from-water-400/15 via-water-600/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative overflow-hidden rounded-2xl border border-water-800/30">
-                  <Image
-                    src="/images/coach_photo.jpg"
-                    alt="Eszter Bary – Schwimmcoach"
-                    width={500}
-                    height={650}
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    className="w-full object-cover aspect-[3/4] transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-water-950/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <p className="font-heading text-xl font-semibold text-cream">Eszter Bary</p>
-                    <p className="text-water-400 text-sm">Schwimmcoach & Gründerin</p>
-                  </div>
+            <div className="md:col-span-2 relative group">
+              <div className="absolute -inset-3 bg-gradient-to-br from-water-400/15 via-water-600/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <ParallaxImage
+                src="/images/coach_photo.jpg"
+                alt="Eszter Bary – Schwimmcoach"
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="aspect-[3/4] rounded-2xl border border-water-800/30"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-water-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="font-heading text-xl font-semibold text-cream">Eszter Bary</p>
+                  <p className="text-water-400 text-sm">Schwimmcoach & Gründerin</p>
                 </div>
-              </div>
-            </AnimatedSection>
+              </ParallaxImage>
+            </div>
 
             <AnimatedSection delay={0.3} direction="right" className="md:col-span-3">
               <div className="space-y-6">
@@ -401,16 +302,18 @@ export default function Home() {
       <section id="angebote" className="relative bg-water-900 py-24 md:py-36 noise-overlay">
         <div className="absolute inset-0 water-caustics opacity-15" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-400 mb-4 text-center">Was ich anbiete</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
-              Meine <span className="gradient-text">Angebote</span>
-            </h2>
-            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
-              Jeder Mensch verdient es, sich im Wasser sicher zu fühlen.
-              Meine Angebote sind individuell auf Ihre Bedürfnisse abgestimmt.
-            </p>
-          </AnimatedSection>
+          <SectionHeading
+            eyebrow="Was ich anbiete"
+            eyebrowClassName="text-water-400"
+            intro={
+              <>
+                Jeder Mensch verdient es, sich im Wasser sicher zu fühlen.
+                Meine Angebote sind individuell auf Ihre Bedürfnisse abgestimmt.
+              </>
+            }
+          >
+            Meine <span className="gradient-text italic">Angebote</span>
+          </SectionHeading>
 
           {/* === BENTO GRID === */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
@@ -610,43 +513,22 @@ export default function Home() {
       <WaveDivider colorFrom="#172e59" colorTo="#0c1a35" flip />
 
       {/* ===== PARALLAX QUOTE ===== */}
-      <section className="relative py-32 md:py-44 overflow-hidden noise-overlay">
-        <div
-          className="absolute inset-0 bg-fixed bg-cover bg-center scale-110"
-          style={{ backgroundImage: "url(/images/pool.jpg)" }}
-        />
-        <div className="absolute inset-0 bg-water-950/75" />
-        <div className="absolute inset-0 water-caustics opacity-20" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <AnimatedSection>
-            <svg className="w-10 h-10 text-water-500/40 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
-            </svg>
-            <p className="font-heading text-3xl md:text-5xl font-semibold text-cream leading-tight italic mb-6">
-              Inspiriert von Szeder – einer geretteten Labrador-Hündin,
-              die ihre Angst vor Wasser überwand.
-            </p>
-            <p className="text-cream/40 text-base">
-              Heute begleite ich Kinder und Erwachsene auf genau diesem Weg.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <ParallaxQuote />
 
       {/* ===== GALERIE ===== */}
       <section id="galerie" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-500 mb-4 text-center">Augenblicke</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
-              Momente im <span className="gradient-text">Wasser</span>
-            </h2>
-            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
-              Echte Augenblicke aus dem Coaching — blättern Sie durch die Bilder
-              und erleben Sie, wie aus Unsicherheit Freude wird.
-            </p>
-          </AnimatedSection>
+          <SectionHeading
+            eyebrow="Augenblicke"
+            intro={
+              <>
+                Echte Augenblicke aus dem Coaching — blättern Sie durch die Bilder
+                und erleben Sie, wie aus Unsicherheit Freude wird.
+              </>
+            }
+          >
+            Momente im <span className="gradient-text italic">Wasser</span>
+          </SectionHeading>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             {galleryGroups.map((group, i) => (
@@ -673,16 +555,18 @@ export default function Home() {
       <section id="erfahrungen" className="relative bg-water-900 py-24 md:py-36 noise-overlay">
         <div className="absolute inset-0 water-caustics opacity-15" />
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-400 mb-4 text-center">Stimmen</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-6">
-              Erfahrungen mit <span className="gradient-text">Szeder Coaching</span>
-            </h2>
-            <p className="text-center text-cream/40 text-base md:text-lg mb-16 max-w-2xl mx-auto leading-relaxed">
-              Echte Rückmeldungen von Familien, die den Weg ins Wasser
-              gemeinsam mit mir gegangen sind.
-            </p>
-          </AnimatedSection>
+          <SectionHeading
+            eyebrow="Stimmen"
+            eyebrowClassName="text-water-400"
+            intro={
+              <>
+                Echte Rückmeldungen von Familien, die den Weg ins Wasser
+                gemeinsam mit mir gegangen sind.
+              </>
+            }
+          >
+            Erfahrungen mit <span className="gradient-text italic">Szeder Coaching</span>
+          </SectionHeading>
 
           {/* Testimonials */}
           <div className="space-y-8 mb-20 md:mb-24">
@@ -822,12 +706,9 @@ export default function Home() {
       {/* ===== KONTAKT ===== */}
       <section id="kontakt" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-          <AnimatedSection>
-            <p className="section-subtitle text-water-500 mb-4 text-center">Lassen Sie uns sprechen</p>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center text-cream mb-16">
-              <span className="gradient-text">Kontakt</span>
-            </h2>
-          </AnimatedSection>
+          <SectionHeading eyebrow="Lassen Sie uns sprechen">
+            <span className="gradient-text italic">Kontakt</span>
+          </SectionHeading>
 
           <div className="grid md:grid-cols-2 gap-10">
             {/* Contact info */}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 // Self-hosted via next/font (no requests to Google's servers → DSGVO-friendly).
@@ -169,6 +170,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <SmoothScroll />
         {children}
       </body>
     </html>
