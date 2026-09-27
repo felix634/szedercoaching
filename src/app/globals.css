@@ -155,6 +155,18 @@ body {
   display: none;
 }
 
+/* The browser may paint once before the overlay is parsed (it yields after the
+   inline boot script). Keep the page itself in the stage colour until the stage
+   is gone, so that early frame doesn't flash the dark site background. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.intro-done) body {
+    animation: intro-early-bg 2.85s;
+  }
+}
+@keyframes intro-early-bg {
+  from, to { background-color: var(--color-water-50); }
+}
+
 .drop-intro__stage {
   position: absolute;
   inset: 0;
