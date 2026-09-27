@@ -80,7 +80,7 @@ const galleryGroups = [
       "/images/simon-anna/3.jpg",
       "/images/simon-anna/4.jpg",
       "/images/simon-anna/5.jpg",
-      "/images/simon-anna/6.jpg",
+      "/images/simon-anna/simon.jpg",
       "/images/simon-anna/7.jpg",
     ],
   },
