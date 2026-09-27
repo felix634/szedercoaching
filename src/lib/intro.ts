@@ -1,5 +1,5 @@
 /** Length of the water intro (fill + exit) before the hero starts animating, in seconds. */
-export const INTRO_SECONDS = 2.2;
+export const INTRO_SECONDS = 2.6;
 
 const STORAGE_KEY = "szeder-intro";
 
