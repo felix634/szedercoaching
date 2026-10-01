@@ -705,6 +705,53 @@ export default function Home() {
       </section>
       <WaveDivider colorFrom="#172e59" colorTo="#0c1a35" flip />
 
+      {/* ===== KOOPERATION ===== */}
+      <section id="kooperation" className="relative pt-24 md:pt-36 bg-water-950 noise-overlay">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
+          <SectionHeading eyebrow="Kooperation" className="mb-12">
+            Gemeinsam <span className="gradient-text italic">schwimmen</span>
+          </SectionHeading>
+
+          <AnimatedSection delay={0.1}>
+            <WaterCard className="glass-card group">
+              <div className="p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-8 md:items-center">
+                <div
+                  aria-hidden="true"
+                  className="w-16 h-16 rounded-2xl bg-water-400/15 border border-water-400/25 flex items-center justify-center flex-shrink-0 group-hover:bg-water-400/25 transition-all duration-500"
+                >
+                  <span className="font-heading text-4xl font-bold gradient-text leading-none">∞</span>
+                </div>
+                <div>
+                  <p className="text-water-400 text-xs tracking-wider uppercase mb-2">
+                    Autismus · Sichtbar machen · Sensibilisieren
+                  </p>
+                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-cream mb-3 group-hover:text-water-200 transition-colors">
+                    Verein Martins Vermächtnis
+                  </h3>
+                  <p className="text-cream/50 text-base leading-relaxed">
+                    Gemeinsam mit dem Verein Martins Vermächtnis aus Mattersburg gehen wir ins Wasser.
+                    Der Verein setzt sich für Menschen im Autismus-Spektrum und ihre Angehörigen ein –
+                    für bessere Rahmenbedingungen und mehr Verständnis in der Gesellschaft.
+                  </p>
+                  <a
+                    href="https://www.verein-martins-vermaechtnis.at/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-water-500/10 border border-water-500/25 text-water-300 text-sm font-medium hover:bg-water-500/20 hover:text-water-200 transition-colors group/link"
+                  >
+                    Zum Verein
+                    <span className="sr-only">(öffnet in neuem Tab)</span>
+                    <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H8M17 7v9" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </WaterCard>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ===== KONTAKT ===== */}
       <section id="kontakt" className="relative py-24 md:py-36 bg-water-950 noise-overlay">
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
