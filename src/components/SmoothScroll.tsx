@@ -7,11 +7,13 @@ import { isSmoothScrolling, scrollToHash, setLenis } from "@/lib/scroll";
 
 /**
  * Inertia-based smooth scrolling (Lenis) for wheel/trackpad. Touch devices keep
- * native scrolling, and it is skipped entirely for prefers-reduced-motion.
+ * native scrolling, and it is skipped entirely for prefers-reduced-motion and in
+ * the Sanity Studio (/studio), whose panes scroll on their own.
  */
 export default function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.location.pathname.startsWith("/studio")) return;
 
     const lenis = new Lenis({
       duration: 1.2,

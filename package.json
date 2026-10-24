@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/locale-hu-hu": "^1.1.39",
     "framer-motion": "^12.0.0",
     "lenis": "^1.3.26",
     "next": "^15.1.0",
+    "next-sanity": "^11.6.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resend": "^6.16.0"
+    "resend": "^6.16.0",
+    "sanity": "^4.22.1",
+    "styled-components": "^6.6.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

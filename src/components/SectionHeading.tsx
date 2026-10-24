@@ -26,7 +26,7 @@ const fadeUp: Variants = {
 };
 
 interface SectionHeadingProps {
-  eyebrow: string;
+  eyebrow?: string | null;
   children: ReactNode;
   intro?: ReactNode;
   /** Eyebrow colour, tuned to the section background. */
@@ -54,22 +54,24 @@ export default function SectionHeading({
       whileInView="show"
       viewport={{ once: true, margin: "0px 0px -12% 0px" }}
     >
-      <motion.p
-        variants={fade}
-        className={`section-subtitle mb-5 flex items-center justify-center gap-4 ${eyebrowClassName}`}
-      >
-        <motion.span
-          aria-hidden="true"
-          variants={hairline}
-          className="h-px w-10 bg-gradient-to-r from-transparent to-current origin-right"
-        />
-        {eyebrow}
-        <motion.span
-          aria-hidden="true"
-          variants={hairline}
-          className="h-px w-10 bg-gradient-to-l from-transparent to-current origin-left"
-        />
-      </motion.p>
+      {eyebrow && (
+        <motion.p
+          variants={fade}
+          className={`section-subtitle mb-5 flex items-center justify-center gap-4 ${eyebrowClassName}`}
+        >
+          <motion.span
+            aria-hidden="true"
+            variants={hairline}
+            className="h-px w-10 bg-gradient-to-r from-transparent to-current origin-right"
+          />
+          {eyebrow}
+          <motion.span
+            aria-hidden="true"
+            variants={hairline}
+            className="h-px w-10 bg-gradient-to-l from-transparent to-current origin-left"
+          />
+        </motion.p>
+      )}
 
       <h2
         className={`font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-cream leading-tight overflow-hidden pb-[0.12em] ${

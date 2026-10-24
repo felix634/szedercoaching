@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
-import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import { SITE_NAME } from "@/lib/site";
+import { getSiteSettings } from "@/sanity/content";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const settings = await getSiteSettings();
   return {
     name: SITE_NAME,
     short_name: "Szeder",
-    description: SITE_DESCRIPTION,
+    description: settings?.seoDescription ?? undefined,
     start_url: "/",
     display: "standalone",
     background_color: "#0c1a35",

@@ -8,6 +8,8 @@ interface ParallaxImageProps {
   src: string;
   alt: string;
   sizes: string;
+  /** Focus point as CSS object-position, e.g. "50% 30%". */
+  position?: string | null;
   /** Sizing/shape of the frame, e.g. "aspect-square rounded-2xl". */
   className?: string;
   /** Overlays rendered above the image (gradients, captions). */
@@ -18,7 +20,7 @@ interface ParallaxImageProps {
  * Image that is revealed like a rising water level when it scrolls into view,
  * then drifts slightly slower than the page for depth.
  */
-export default function ParallaxImage({ src, alt, sizes, className = "", children }: ParallaxImageProps) {
+export default function ParallaxImage({ src, alt, sizes, position, className = "", children }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -47,6 +49,7 @@ export default function ParallaxImage({ src, alt, sizes, className = "", childre
             fill
             sizes={sizes}
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            style={position ? { objectPosition: position } : undefined}
           />
         </motion.div>
       </motion.div>

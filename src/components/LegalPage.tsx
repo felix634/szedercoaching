@@ -13,8 +13,8 @@ export default function LegalPage({
   children,
 }: {
   title: string;
-  intro?: string;
-  lastUpdated: string;
+  intro?: string | null;
+  lastUpdated?: string | null;
   children: React.ReactNode;
 }) {
   const year = new Date().getFullYear();
@@ -58,7 +58,7 @@ export default function LegalPage({
         <p className="section-subtitle text-water-500 mb-3">Rechtliches</p>
         <h1 className="font-heading text-4xl md:text-5xl font-bold text-cream mb-4">{title}</h1>
         {intro && <p className="text-cream/50 text-base mb-2 max-w-2xl">{intro}</p>}
-        <p className="text-cream/30 text-xs mb-12">Stand: {lastUpdated}</p>
+        {lastUpdated ? <p className="text-cream/30 text-xs mb-12">Stand: {lastUpdated}</p> : <div className="mb-12" />}
         <div className="legal-prose">{children}</div>
       </article>
 

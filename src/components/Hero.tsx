@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import WaterSurface from "@/components/WaterSurface";
 import { introDelay } from "@/lib/intro";
+import type { HeroContent } from "@/sanity/content";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -28,7 +29,8 @@ const lineReveal = {
   }),
 };
 
-export default function Hero() {
+export default function Hero({ content }: { content: HeroContent | null }) {
+  const { image, eyebrow, line1, line2, text, scrollLabel } = content ?? {};
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   // Entrance waits for the water intro when it is playing (read once on mount).
@@ -53,14 +55,17 @@ export default function Hero() {
         className="absolute inset-0 will-change-transform"
         style={reduce ? undefined : { scale: bgScale, y: bgY }}
       >
-        <Image
-          src="/images/hero-20260830.jpg"
-          alt="Ruhige Wasseroberfläche – Schwimmcoaching mit Herz bei Szeder Coaching"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {image && (
+          <Image
+            src={image.url}
+            alt={image.alt ?? ""}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={image.position ? { objectPosition: image.position } : undefined}
+          />
+        )}
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-water-950/70 via-water-950/35 to-water-950 pointer-events-none" />
       <motion.div
@@ -91,14 +96,16 @@ export default function Hero() {
           />
         </motion.div>
 
-        <motion.p
-          initial={reduce ? false : { opacity: 0, letterSpacing: "0.5em" }}
-          animate={{ opacity: 1, letterSpacing: "0.2em" }}
-          transition={{ duration: 1.4, delay: offset + 0.3, ease: EASE_OUT }}
-          className="section-subtitle text-water-300 mb-6"
-        >
-          Schwimmcoaching mit Herz
-        </motion.p>
+        {eyebrow && (
+          <motion.p
+            initial={reduce ? false : { opacity: 0, letterSpacing: "0.5em" }}
+            animate={{ opacity: 1, letterSpacing: "0.2em" }}
+            transition={{ duration: 1.4, delay: offset + 0.3, ease: EASE_OUT }}
+            className="section-subtitle text-water-300 mb-6"
+          >
+            {eyebrow}
+          </motion.p>
+        )}
 
         <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.08] tracking-tight">
           <span className="block overflow-hidden pb-[0.08em] px-[0.08em]">
@@ -109,31 +116,34 @@ export default function Hero() {
               initial={reduce ? false : "hidden"}
               animate="show"
             >
-              Vertrauen lernen.
+              {line1}
             </motion.span>
           </span>
-          <span className="block overflow-hidden pb-[0.12em] px-[0.08em]">
-            <motion.span
-              className="block italic gradient-text"
-              custom={[1, offset]}
-              variants={lineReveal}
-              initial={reduce ? false : "hidden"}
-              animate="show"
-            >
-              Freiheit erleben.
-            </motion.span>
-          </span>
+          {line2 && (
+            <span className="block overflow-hidden pb-[0.12em] px-[0.08em]">
+              <motion.span
+                className="block italic gradient-text"
+                custom={[1, offset]}
+                variants={lineReveal}
+                initial={reduce ? false : "hidden"}
+                animate="show"
+              >
+                {line2}
+              </motion.span>
+            </span>
+          )}
         </h1>
 
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: offset + 0.9, ease: EASE_OUT }}
-          className="text-lg md:text-xl text-cream/75 max-w-2xl mx-auto leading-relaxed"
-        >
-          Ängste überwinden und die Freude am Schwimmen entdecken —
-          für Kinder und Erwachsene mit besonderen Bedürfnissen.
-        </motion.p>
+        {text && (
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: offset + 0.9, ease: EASE_OUT }}
+            className="text-lg md:text-xl text-cream/75 max-w-2xl mx-auto leading-relaxed"
+          >
+            {text}
+          </motion.p>
+        )}
       </motion.div>
 
       {/* Scroll indicator: a drop sliding down a thin line */}
@@ -149,9 +159,11 @@ export default function Hero() {
           transition={{ delay: offset + 1.8, duration: 1 }}
           className="flex flex-col items-center gap-3 group"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-cream/40 group-hover:text-cream/70 transition-colors">
-            Eintauchen
-          </span>
+          {scrollLabel && (
+            <span className="text-[10px] tracking-[0.3em] uppercase text-cream/40 group-hover:text-cream/70 transition-colors">
+              {scrollLabel}
+            </span>
+          )}
           <span className="relative block h-14 w-px overflow-hidden bg-cream/15">
             <span className="absolute left-0 top-0 h-5 w-px bg-gradient-to-b from-transparent to-water-300 animate-scroll-drop" />
           </span>

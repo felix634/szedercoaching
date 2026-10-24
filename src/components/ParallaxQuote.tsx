@@ -9,9 +9,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-
-const QUOTE =
-  "Inspiriert von Szeder – einer geretteten Labrador-Hündin, die ihre Angst vor Wasser überwand.";
+import type { HomeContent } from "@/sanity/content";
 
 function Word({
   children,
@@ -34,7 +32,8 @@ function Word({
 }
 
 /** Full-bleed quote over a parallax pool photo; words surface as you scroll. */
-export default function ParallaxQuote() {
+export default function ParallaxQuote({ content }: { content: HomeContent["quote"] }) {
+  const { image, text, subtext } = content ?? {};
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
@@ -50,7 +49,8 @@ export default function ParallaxQuote() {
     offset: ["start 0.85", "end 0.5"],
   });
 
-  const words = QUOTE.split(" ");
+  const quote = text ?? "";
+  const words = quote.split(/\s+/).filter(Boolean);
 
   return (
     <section ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden noise-overlay">
@@ -58,7 +58,16 @@ export default function ParallaxQuote() {
         className="absolute inset-x-0 -inset-y-[15%]"
         style={reduce ? undefined : { y: bgY }}
       >
-        <Image src="/images/pool.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        {image && (
+          <Image
+            src={image.url}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={image.position ? { objectPosition: image.position } : undefined}
+          />
+        )}
       </motion.div>
       <div className="absolute inset-0 bg-water-950/75" />
       <div className="absolute inset-0 water-caustics opacity-30" />
@@ -82,7 +91,7 @@ export default function ParallaxQuote() {
           className="font-heading text-3xl md:text-5xl font-semibold text-cream leading-tight italic mb-8"
         >
           {reduce
-            ? QUOTE
+            ? quote
             : words.map((word, i) => (
                 <Word
                   key={i}
@@ -94,15 +103,17 @@ export default function ParallaxQuote() {
               ))}
         </p>
 
-        <motion.p
-          className="text-cream/50 text-base"
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-          transition={{ duration: 0.9, delay: 0.2 }}
-        >
-          Heute begleite ich Kinder und Erwachsene auf genau diesem Weg.
-        </motion.p>
+        {subtext && (
+          <motion.p
+            className="text-cream/50 text-base"
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+          >
+            {subtext}
+          </motion.p>
+        )}
       </div>
     </section>
   );

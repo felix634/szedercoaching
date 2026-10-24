@@ -3,9 +3,11 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Picture } from "@/sanity/content";
 
 interface ImageCarouselProps {
-  images: string[];
+  images: Picture[];
+  /** Fallback alt text (group title + number) for images without their own. */
   alt: string;
 }
 
@@ -38,7 +40,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
         >
           {/* Blurred fill so portrait & landscape images share the frame cleanly */}
           <Image
-            src={images[current]}
+            src={images[current].url}
             alt=""
             aria-hidden
             fill
@@ -48,8 +50,8 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
           <div className="absolute inset-0 bg-water-950/30" />
           {/* Full image, never cropped */}
           <Image
-            src={images[current]}
-            alt={`${alt} ${current + 1}`}
+            src={images[current].url}
+            alt={images[current].alt || `${alt} ${current + 1}`}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-contain"

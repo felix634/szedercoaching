@@ -8,5 +8,4 @@ export const SITE_URL = "https://www.szedercoaching.at";
 
 export const SITE_NAME = "Szeder Coaching";
 
-export const SITE_DESCRIPTION =
-  "Angstabbau im Wasser, Schwimmen lernen mit Vertrauen. Individuelles Coaching für Kinder und Erwachsene mit besonderen Bedürfnissen. Nordburgenland – Eisenstadt.";
+// Title, description and all page content are edited in Sanity (src/sanity/).

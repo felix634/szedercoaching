@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import { INTRO_BOOT_SCRIPT } from "@/lib/intro";
+import { getSiteSettings, phoneHref, type SiteSettings } from "@/sanity/content";
 import "./globals.css";
 
 // Self-hosted via next/font (no requests to Google's servers → DSGVO-friendly).
@@ -19,66 +20,62 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const TITLE = "Szeder Coaching – Schwimmcoaching mit Herz";
+// Title, description, keywords and the social preview image are edited in Sanity
+// ("Beállítások"); the rest is fixed.
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const title = settings?.seoTitle ?? SITE_NAME;
+  const description = settings?.seoDescription ?? undefined;
+  const author = settings?.contact?.name;
+  // Cropped to 1200×630 by Sanity's image CDN; only crawlers fetch this URL.
+  const ogImage = settings?.ogImage && {
+    url: `${settings.ogImage.url}?w=1200&h=630&fit=crop`,
+    width: 1200,
+    height: 630,
+    alt: settings.ogImage.alt ?? title,
+  };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: TITLE,
-    template: "%s | Szeder Coaching",
-  },
-  description: SITE_DESCRIPTION,
-  keywords: [
-    "Schwimmcoaching",
-    "Angst vor Wasser",
-    "Schwimmen lernen",
-    "Wassergewöhnung",
-    "Schwimmkurs Erwachsene",
-    "Schwimmen Kinder",
-    "Eisenstadt",
-    "Burgenland",
-    "Nordburgenland",
-    "Coaching",
-  ],
-  authors: [{ name: "Eszter Bary" }],
-  creator: "Eszter Bary",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "de_AT",
-    url: "/",
-    siteName: SITE_NAME,
-    title: TITLE,
-    description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: "/images/og-image2.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Szeder Coaching – Schwimmcoaching mit Herz",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: TITLE,
-    description: SITE_DESCRIPTION,
-    images: ["/images/og-image2.jpg"],
-  },
-  icons: {
-    icon: [
-      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-    ],
-    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180" }],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: "%s | Szeder Coaching",
+    },
+    description,
+    keywords: settings?.keywords ?? undefined,
+    authors: author ? [{ name: author }] : undefined,
+    creator: author ?? undefined,
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      type: "website",
+      locale: "de_AT",
+      url: "/",
+      siteName: SITE_NAME,
+      title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage ? [ogImage.url] : undefined,
+    },
+    icons: {
+      icon: [
+        { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      ],
+      apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180" }],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -86,45 +83,50 @@ export const viewport: Viewport = {
   themeColor: "#0c1a35",
 };
 
-const jsonLd = {
+// Contact data, address, description and images come from Sanity; undefined
+// values simply drop out of the JSON.
+const structuredData = (settings: SiteSettings | null) => ({
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": `${SITE_URL}/#business`,
   name: SITE_NAME,
-  description: SITE_DESCRIPTION,
-  slogan: "Vertrauen lernen. Freiheit erleben.",
+  description: settings?.seoDescription ?? undefined,
+  slogan: settings?.slogan || undefined,
   url: SITE_URL,
-  image: [
-    `${SITE_URL}/images/og-image2.jpg`,
-    `${SITE_URL}/images/hero-20260830.jpg`,
-    `${SITE_URL}/images/pool.jpg`,
-  ],
+  image: settings?.images ?? undefined,
   logo: `${SITE_URL}/images/logo.png`,
-  telephone: "+4367761526206",
-  email: "eszterbary@szedercoaching.at",
+  telephone: settings?.contact?.phone ? phoneHref(settings.contact.phone) : undefined,
+  email: settings?.contact?.email ?? undefined,
   inLanguage: "de-AT",
-  founder: {
-    "@type": "Person",
-    name: "Eszter Bary",
-    jobTitle: "Schwimmcoach",
-  },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Krensdorferstraße 10",
-    addressLocality: "Hirm",
-    addressRegion: "Burgenland",
-    postalCode: "7024",
-    addressCountry: "AT",
-  },
+  founder: settings?.contact?.name
+    ? {
+        "@type": "Person",
+        name: settings.contact.name,
+        jobTitle: "Schwimmcoach",
+      }
+    : undefined,
+  address: settings?.address?.street
+    ? {
+        "@type": "PostalAddress",
+        streetAddress: settings.address.street,
+        addressLocality: settings.address.city ?? undefined,
+        addressRegion: "Burgenland",
+        postalCode: settings.address.postalCode ?? undefined,
+        addressCountry: "AT",
+      }
+    : undefined,
+  // Coordinates of the Hirm address — update together if the address ever moves.
   geo: {
     "@type": "GeoCoordinates",
     latitude: 47.7865,
     longitude: 16.4546,
   },
-  areaServed: {
-    "@type": "AdministrativeArea",
-    name: "Nordburgenland – Eisenstadt und Umgebung",
-  },
+  areaServed: settings?.contact?.location
+    ? {
+        "@type": "AdministrativeArea",
+        name: settings.contact.location,
+      }
+    : undefined,
   knowsAbout: [
     "Schwimmcoaching",
     "Angstabbau im Wasser",
@@ -151,13 +153,16 @@ const jsonLd = {
     })),
   },
   priceRange: "€€",
-};
+});
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // "<" escaped so text edited in Sanity can never close the inline script.
+  const jsonLd = JSON.stringify(structuredData(await getSiteSettings())).replace(/</g, "\\u003c");
+
   return (
     // suppressHydrationWarning: the intro boot script may add a class to <html> before hydration.
     <html lang="de-AT" className={`${playfair.variable} ${dmSans.variable}`} suppressHydrationWarning>
@@ -171,7 +176,7 @@ export default function RootLayout({
         </a>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd }}
         />
         <SmoothScroll />
         {children}

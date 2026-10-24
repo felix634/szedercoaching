@@ -10,19 +10,6 @@ import {
   useTransform,
 } from "framer-motion";
 
-const words = [
-  "Schwimmen",
-  "Vertrauen",
-  "Wasser",
-  "Freiheit",
-  "Mut",
-  "Coaching",
-  "Stärke",
-  "Freude",
-  "Sicherheit",
-  "Inklusion",
-];
-
 const wrap = (min: number, max: number, v: number) => {
   const range = max - min;
   return ((((v - min) % range) + range) % range) + min;
@@ -37,7 +24,13 @@ function Drop() {
 }
 
 /** Endless word band drifting slowly and steadily. */
-export default function Marquee({ baseVelocity = -1.5 }: { baseVelocity?: number }) {
+export default function Marquee({
+  words,
+  baseVelocity = -1.5,
+}: {
+  words: string[];
+  baseVelocity?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref);
   const reduce = useReducedMotion();
@@ -50,6 +43,10 @@ export default function Marquee({ baseVelocity = -1.5 }: { baseVelocity?: number
     baseX.set(baseX.get() + baseVelocity * (delta / 1000));
   });
 
+  if (!words.length) return null;
+  // A short list is repeated so one set still spans wide screens without a gap.
+  const band = Array.from({ length: Math.ceil(10 / words.length) }, () => words).flat();
+
   return (
     <div
       ref={ref}
@@ -59,7 +56,7 @@ export default function Marquee({ baseVelocity = -1.5 }: { baseVelocity?: number
       <motion.div className="flex w-max whitespace-nowrap items-center" style={{ x }}>
         {[0, 1].map((set) => (
           <div key={set} className="flex items-center">
-            {words.map((word, i) => (
+            {band.map((word, i) => (
               <span key={`${set}-${i}`} className="flex items-center">
                 <span
                   className={`font-heading text-4xl md:text-6xl lg:text-7xl tracking-tight ${

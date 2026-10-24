@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
+import { dataset, projectId } from "./src/sanity/env";
 
 // Content-Security-Policy: allows the site's own assets, inline styles (Tailwind /
 // framer-motion) and the inline JSON-LD script, data/blob images (next/image),
-// while blocking framing and plugins.
+// while blocking framing and plugins. Sanity images also come through next/image
+// (/_next/image), so visitors' browsers never contact Sanity directly.
 const isDev = process.env.NODE_ENV !== "production";
 
 const ContentSecurityPolicy = [
@@ -21,7 +23,6 @@ const ContentSecurityPolicy = [
 ].join("; ");
 
 const securityHeaders = [
-  { key: "Content-Security-Policy", value: ContentSecurityPolicy },
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
@@ -42,9 +43,19 @@ const nextConfig: NextConfig = {
     // cached for 31 days instead of the 60-second default.
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2678400,
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io", pathname: `/images/${projectId}/${dataset}/**` },
+    ],
   },
+  // The embedded Sanity Studio (/studio) is built with styled-components.
+  compiler: { styledComponents: true },
   async headers() {
     return [
+      {
+        // Everything except the Studio, which calls Sanity's API from the browser.
+        source: "/((?!studio).*)",
+        headers: [{ key: "Content-Security-Policy", value: ContentSecurityPolicy }],
+      },
       {
         source: "/:path*",
         headers: securityHeaders,

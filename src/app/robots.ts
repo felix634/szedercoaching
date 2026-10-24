@@ -6,6 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // The content editor (Sanity Studio) is behind a login and has nothing to index.
+      disallow: "/studio",
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
